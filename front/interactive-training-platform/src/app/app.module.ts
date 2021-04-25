@@ -22,9 +22,9 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatButtonModule} from "@angular/material/button";
 import { CourseContentComponent } from './components/course-content/course-content.component';
 import {SafePipe} from "./pipes/safe-html.pipe";
-import {NgxAudioPlayerModule} from "ngx-audio-player";
 import { ImageContentContainerComponent } from './components/image-content-container/image-content-container.component';
 import {MatRadioModule} from "@angular/material/radio";
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import {MatRadioModule} from "@angular/material/radio";
     AddNewCourseComponent,
     LoginComponent,
     CourseContentComponent,
-    ImageContentContainerComponent
+    ImageContentContainerComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,6 @@ import {MatRadioModule} from "@angular/material/radio";
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
-    NgxAudioPlayerModule,
     MatRadioModule,
     FormsModule
   ],

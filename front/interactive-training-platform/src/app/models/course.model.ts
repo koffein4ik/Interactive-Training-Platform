@@ -1,4 +1,4 @@
-import {SlideModel} from "./slide.model";
+import {LessonModel} from "./lessonModel";
 
 export class CourseModel {
   id: number;
@@ -7,5 +7,5 @@ export class CourseModel {
   fullDescription: string;
   price: number;
   imagePath: string;
-  courseContent: SlideModel[];
+  courseContent: LessonModel[];
 }

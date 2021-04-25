@@ -1,5 +1,6 @@
 import {SlideContentModel} from "./slide-content.model";
 
-export class SlideModel {
+export class LessonModel {
+  name: string;
   slideContent: SlideContentModel[];
 }
