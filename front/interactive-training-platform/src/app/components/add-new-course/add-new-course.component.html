@@ -1,0 +1,39 @@
+<div class="add-new-course-container">
+  <div class="add-new-course-first-step" *ngIf="currentStep === 1">
+    <form [formGroup]="courseDescriptionFormGroup">
+      <mat-form-field appearance="legacy">
+        <mat-label>Course name</mat-label>
+        <input matInput [formControlName]="'courseName'" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <mat-label>Course Short description</mat-label>
+        <input matInput [formControlName]="'courseShortDescription'" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <mat-label>Course full description</mat-label>
+        <input matInput [formControlName]="'courseFullDescription'" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <mat-label>Course price</mat-label>
+        <input matInput [formControlName]="'coursePrice'" required>
+      </mat-form-field>
+    </form>
+
+    PATH TO COURSE PICTURE ALSO SHOULD BE HERE
+
+    <div class="add-new-course-first-step-save">
+      <button mat-button color="primary" [disabled]="courseDescriptionFormGroup.invalid" (click)="onClickSaveFirstStep()">Save</button>
+    </div>
+  </div>
+
+  <div class="add-new-course-second-step" *ngIf="currentStep === 2">
+    <app-course-content></app-course-content>
+
+    <div class="add-new-course-second-step-save">
+      <button mat-button color="primary" (click)="onClickSaveSecondStep()">Save</button>
+    </div>
+  </div>
+</div>
