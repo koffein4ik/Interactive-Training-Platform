@@ -25,6 +25,11 @@ import {SafePipe} from "./pipes/safe-html.pipe";
 import { ImageContentContainerComponent } from './components/image-content-container/image-content-container.component';
 import {MatRadioModule} from "@angular/material/radio";
 import { FooterComponent } from './components/footer/footer.component';
+import {MatIconModule} from "@angular/material/icon";
+import { AddNewLessonPopupComponent } from './components/add-new-lesson-popup/add-new-lesson-popup.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { AddCourseContentPopupComponent } from './components/add-course-content-popup/add-course-content-popup.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -42,7 +47,9 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginComponent,
     CourseContentComponent,
     ImageContentContainerComponent,
-    FooterComponent
+    FooterComponent,
+    AddNewLessonPopupComponent,
+    AddCourseContentPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +62,10 @@ import { FooterComponent } from './components/footer/footer.component';
     MatNativeDateModule,
     MatButtonModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

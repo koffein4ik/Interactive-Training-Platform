@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Add course content</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose an option</mat-label>
+    <mat-select [(value)]="selectedOption" (valueChange)="onSelectedOptionChange()">
+      <mat-option [value]="TEXT_SLIDE_TYPE">{{TEXT_SLIDE_TYPE}}</mat-option>
+      <mat-option [value]="AUDIO_SLIDE_TYPE">{{AUDIO_SLIDE_TYPE}}</mat-option>
+      <mat-option [value]="VIDEO_SLIDE_TYPE">{{VIDEO_SLIDE_TYPE}}</mat-option>
+      <mat-option [value]="IMAGE_SLIDE_TYPE">{{IMAGE_SLIDE_TYPE}}</mat-option>
+      <mat-option [value]="RADIO_BUTTON_SLIDE_TYPE">{{RADIO_BUTTON_SLIDE_TYPE}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="add-course-content-popup-text" *ngIf="selectedOption === TEXT_SLIDE_TYPE">
+    <mat-form-field appearance="legacy">
+      <mat-label>Enter content</mat-label>
+      <textarea matInput required [(ngModel)]="content"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="add-course-content-popup-text" *ngIf="selectedOption === AUDIO_SLIDE_TYPE">
+    Audio
+  </div>
+
+  <div class="add-course-content-popup-text" *ngIf="selectedOption === VIDEO_SLIDE_TYPE">
+    <mat-form-field appearance="fill">
+      <mat-label>Input</mat-label>
+      <input matInput required [(ngModel)]="content">
+    </mat-form-field>
+  </div>
+
+  <div class="add-course-content-popup-text" *ngIf="selectedOption === IMAGE_SLIDE_TYPE">
+    Image
+  </div>
+
+  <div class="add-course-content-popup-text" *ngIf="selectedOption === RADIO_BUTTON_SLIDE_TYPE">
+    Radio button
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="onSave()">OK</button>
+</div>

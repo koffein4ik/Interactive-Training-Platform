@@ -30,7 +30,11 @@
   </div>
 
   <div class="add-new-course-second-step" *ngIf="currentStep === 2">
-    <app-course-content></app-course-content>
+    <app-course-content [isAddNewCourse]="true"
+                        [course]="createdCourse"
+                        [currentLessonNumber]="currentLessonNumber"
+                        (onAddCourseContentClick)="openCourseContentDialog()"
+                        (onAddNewLessonClick)="openLessonDialog()"></app-course-content>
 
     <div class="add-new-course-second-step-save">
       <button mat-button color="primary" (click)="onClickSaveSecondStep()">Save</button>

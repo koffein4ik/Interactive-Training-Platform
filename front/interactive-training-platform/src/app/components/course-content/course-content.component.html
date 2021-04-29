@@ -1,5 +1,11 @@
 <div class="course-container">
   <div class="course-navbar">
+    <div class="course-navbar-button-add" *ngIf="isAddNewCourse">
+      <button mat-icon-button color="primary" (click)="onAddNewLessonClick.emit()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
     <div *ngFor="let lesson of course.courseContent; let i = index">
       <div class="course-navbar-button">
         <button mat-button color="primary" [disabled]="i === currentLessonNumber" (click)="onCourseLessonChange(i)">{{lesson.name}}</button>
@@ -10,6 +16,10 @@
   <div class="course-content-container">
     <div class="course-content-number">
       Lesson number {{currentLessonNumber + 1}}
+    </div>
+
+    <div class="course-navbar-button-add" *ngIf="isAddNewCourse">
+      <button mat-button color="primary" (click)="onAddCourseContentClick.emit()">Add content</button>
     </div>
 
     <div class="course-content-container__nav-buttons-container">
