@@ -1,0 +1,29 @@
+.login {
+  width: 400px;
+  margin: 20px auto;
+  border: 0.2rem solid #333333;
+  border-radius: 0.2rem;
+
+  &_title {
+    text-align: center;
+  }
+
+  &_form {
+    display: flex;
+    flex-direction: column;
+
+    & .mat-form-field, .mat-checkbox {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  &-error {
+    margin: 10px;
+    color: red;
+  }
+
+  &-submit {
+    margin: 10px;
+  }
+}

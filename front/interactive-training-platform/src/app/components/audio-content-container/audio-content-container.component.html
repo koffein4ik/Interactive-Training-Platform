@@ -1,5 +1,5 @@
 <div class="audio-content-container">
   <audio controls>
-         <source [src]="src" type="audio/mp3">
+         <source [src]="audioLink | safeHtml: 'resourceUrl'" type="audio/mp3">
   </audio>
 </div>

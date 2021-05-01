@@ -7,6 +7,7 @@ import {SlideContentModel} from "../../models/slide-content.model";
 import {SlideContentConstantsModel} from "../../models/slide-content-constants.model";
 import {LessonModel} from "../../models/lessonModel";
 import {AddCourseContentPopupComponent} from "../add-course-content-popup/add-course-content-popup.component";
+import {CourseService} from "../../services/course.service";
 
 @Component({
   selector: 'app-add-new-course',
@@ -53,10 +54,11 @@ export class AddNewCourseComponent implements OnInit {
     courseContent: [this.courseContent, this.courseContent2]
   }
 
-  constructor(private matDialog: MatDialog) {
+  constructor(private matDialog: MatDialog, private courseService: CourseService) {
   }
 
   public ngOnInit(): void {
+    this.courseService.test().subscribe((value) => console.log(value));
     this.courseDescriptionFormGroup = new FormGroup({
       courseName: new FormControl(),
       courseShortDescription: new FormControl(),

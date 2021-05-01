@@ -15,6 +15,4 @@ export class AudioContentContainerComponent implements OnInit {
   ngOnInit() {
   }
 
-  src: string = 'http://www.book2.nl/book2/EN/SOUND/0703.mp3';
-
 }

@@ -30,6 +30,9 @@ import { AddNewLessonPopupComponent } from './components/add-new-lesson-popup/ad
 import {MatDialogModule} from "@angular/material/dialog";
 import { AddCourseContentPopupComponent } from './components/add-course-content-popup/add-course-content-popup.component';
 import {MatSelectModule} from "@angular/material/select";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {APIInterceptor} from "./interceptors/api-interceptor";
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import {MatSelectModule} from "@angular/material/select";
     ImageContentContainerComponent,
     FooterComponent,
     AddNewLessonPopupComponent,
-    AddCourseContentPopupComponent
+    AddCourseContentPopupComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -65,9 +69,14 @@ import {MatSelectModule} from "@angular/material/select";
     FormsModule,
     MatIconModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [APIInterceptor, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: APIInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

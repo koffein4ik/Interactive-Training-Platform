@@ -1,0 +1,27 @@
+<div class="file-upload-container">
+  <div class="file-upload-title">
+    {{title}}
+  </div>
+
+  <div class="file-upload-main">
+    <input #myFileInput type="file"
+           [accept]="fileType === IMAGE_FILE_TYPE ? 'image/*' : 'audio/*'"
+           (change)="handleFileInput($event.target.files)">
+  </div>
+
+  <div class="file-upload-info">
+    Here you can choose file which you want to upload
+  </div>
+
+  <div class="file-upload-chosen-file" *ngIf="fileContent">
+    <app-image-content-container *ngIf="fileType === IMAGE_FILE_TYPE" [imageLink]="fileContent">
+    </app-image-content-container>
+
+    <app-audio-content-container *ngIf="fileType === AUDIO_FILE_TYPE" [audioLink]="fileContent">
+    </app-audio-content-container>
+  </div>
+
+  <div class="file-upload-button-save">
+    <button mat-button color="primary" (click)="onUploadFile()">Save file</button>
+  </div>
+</div>

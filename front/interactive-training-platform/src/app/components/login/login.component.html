@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="login">
+  <div class="login_title">
+    <h1>login</h1>
+  </div>
+  <form [formGroup]="formGroup" class="login_form">
+    <mat-form-field appearance="legacy">
+      <mat-label>Login</mat-label>
+      <input matInput [formControlName]="'login'" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [formControlName]="'password'" required>
+    </mat-form-field>
+
+  </form>
+
+  <div class="login-error" *ngIf="formGroup.invalid">
+    Please fill all required fields
+  </div>
+
+  <div class="login-submit">
+    <button mat-button color="primary" [disabled]="formGroup.invalid" (click)="onLoginButtonClick()">Log in</button>
+  </div>
+</div>

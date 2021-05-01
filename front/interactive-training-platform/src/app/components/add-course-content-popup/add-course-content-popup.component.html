@@ -19,7 +19,11 @@
   </div>
 
   <div class="add-course-content-popup-text" *ngIf="selectedOption === AUDIO_SLIDE_TYPE">
-    Audio
+    <app-file-upload [title]="'Audio file upload'" [fileType]="'Audio'"></app-file-upload>
+  </div>
+
+  <div class="add-course-content-popup-text" *ngIf="selectedOption === IMAGE_SLIDE_TYPE">
+    <app-file-upload [title]="'Image file upload'" [fileType]="'Image'"></app-file-upload>
   </div>
 
   <div class="add-course-content-popup-text" *ngIf="selectedOption === VIDEO_SLIDE_TYPE">
@@ -27,10 +31,6 @@
       <mat-label>Input</mat-label>
       <input matInput required [(ngModel)]="content">
     </mat-form-field>
-  </div>
-
-  <div class="add-course-content-popup-text" *ngIf="selectedOption === IMAGE_SLIDE_TYPE">
-    Image
   </div>
 
   <div class="add-course-content-popup-text" *ngIf="selectedOption === RADIO_BUTTON_SLIDE_TYPE">
