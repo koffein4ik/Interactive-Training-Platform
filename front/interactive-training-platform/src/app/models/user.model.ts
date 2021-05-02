@@ -1,0 +1,8 @@
+export class UserModel {
+  login: string;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  email: string;
+  password: string;
+}

@@ -22,7 +22,12 @@
       </mat-form-field>
     </form>
 
-    PATH TO COURSE PICTURE ALSO SHOULD BE HERE
+    <div class="add-new-course-first-step__upload-image">
+      <app-file-upload
+        [title]="'Choose course image'"
+        [fileType]="'IMAGE'"
+        (onFileChosen)="onCourseImageChosen($event)"></app-file-upload>
+    </div>
 
     <div class="add-new-course-first-step-save">
       <button mat-button color="primary" [disabled]="courseDescriptionFormGroup.invalid" (click)="onClickSaveFirstStep()">Save</button>
@@ -41,6 +46,3 @@
     </div>
   </div>
 </div>
-
-<app-file-upload [title]="'Upload audio'" [fileType]="'AUDIO'"></app-file-upload>
-<app-file-upload [title]="'Upload image'" [fileType]="'IMAGE'"></app-file-upload>

@@ -21,7 +21,7 @@
     </app-audio-content-container>
   </div>
 
-  <div class="file-upload-button-save">
+  <div *ngIf="showSaveButton" class="file-upload-button-save">
     <button mat-button color="primary" (click)="onUploadFile()">Save file</button>
   </div>
 </div>

@@ -8,22 +8,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service("customUserDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
-
-    @Autowired
-    public UserDetailsServiceImpl(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -34,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (userEntity == null) {
             throw  new UsernameNotFoundException("Invalid username or password");
         }
-        return new User(userEntity.getLogin(), userEntity.getPassowrd(), getAuthority());
+        return new User(userEntity.getLogin(), userEntity.getPassword(), getAuthority());
     }
 
     private UsersEntity findByLogin(String login) {

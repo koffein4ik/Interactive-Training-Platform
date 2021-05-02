@@ -10,12 +10,13 @@ public class UsersEntity {
     private int id;
     private String lastName;
     private String firstName;
-    private String passowrd;
+    private String password;
     private String login;
     private Date birthDate;
     private String email;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     public int getId() {
         return id;
@@ -46,13 +47,13 @@ public class UsersEntity {
     }
 
     @Basic
-    @Column(name = "Passowrd")
-    public String getPassowrd() {
-        return passowrd;
+    @Column(name = "Password")
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassowrd(String passowrd) {
-        this.passowrd = passowrd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Basic
@@ -90,11 +91,11 @@ public class UsersEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UsersEntity that = (UsersEntity) o;
-        return id == that.id && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(passowrd, that.passowrd) && Objects.equals(login, that.login) && Objects.equals(birthDate, that.birthDate) && Objects.equals(email, that.email);
+        return id == that.id && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(password, that.password) && Objects.equals(login, that.login) && Objects.equals(birthDate, that.birthDate) && Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, lastName, firstName, passowrd, login, birthDate, email);
+        return Objects.hash(id, lastName, firstName, password, login, birthDate, email);
     }
 }

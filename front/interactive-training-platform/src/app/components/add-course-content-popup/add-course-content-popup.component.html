@@ -19,11 +19,17 @@
   </div>
 
   <div class="add-course-content-popup-text" *ngIf="selectedOption === AUDIO_SLIDE_TYPE">
-    <app-file-upload [title]="'Audio file upload'" [fileType]="'Audio'"></app-file-upload>
+    <app-file-upload
+      [title]="'Audio file upload'"
+      [fileType]="'AUDIO'"
+      (onFileChosen)="onFileChosen($event)"></app-file-upload>
   </div>
 
   <div class="add-course-content-popup-text" *ngIf="selectedOption === IMAGE_SLIDE_TYPE">
-    <app-file-upload [title]="'Image file upload'" [fileType]="'Image'"></app-file-upload>
+    <app-file-upload
+      [title]="'Image file upload'"
+      [fileType]="'IMAGE'"
+      (onFileChosen)="onFileChosen($event)"></app-file-upload>
   </div>
 
   <div class="add-course-content-popup-text" *ngIf="selectedOption === VIDEO_SLIDE_TYPE">

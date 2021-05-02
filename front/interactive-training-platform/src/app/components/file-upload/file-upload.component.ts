@@ -1,6 +1,5 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {UploadFileConstants} from "../../models/upload-file.constants";
-import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-file-upload',
@@ -17,13 +16,19 @@ export class FileUploadComponent implements OnInit {
   @Input()
   public fileType: UploadFileConstants;
 
+  @Input()
+  public showSaveButton: boolean;
+
+  @Output()
+  public onFileChosen: EventEmitter<File> = new EventEmitter();
+
   public fileToUpload: File;
   public fileContent: string;
 
   public readonly AUDIO_FILE_TYPE: string = UploadFileConstants.AUDIO_FILE_TYPE;
   public readonly IMAGE_FILE_TYPE: string = UploadFileConstants.IMAGE_FILE_TYPE;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor() {
   }
 
   public ngOnInit(): void {
@@ -39,6 +44,7 @@ export class FileUploadComponent implements OnInit {
     reader.readAsDataURL(files[0]);
     reader.onload = (event) => {
       this.fileContent = reader.result.toString();
+      this.onFileChosen.emit(this.fileToUpload);
     }
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {SlideContentConstantsModel} from "../../models/slide-content-constants.model";
 import {SlideContentModel} from "../../models/slide-content.model";
+import {FileService} from "../../services/file.service";
 
 @Component({
   selector: 'app-add-course-content-popup',
@@ -40,6 +41,10 @@ export class AddCourseContentPopupComponent implements OnInit {
       slideContent: this.content
     }
     this.dialogRef.close(slideContent);
+  }
+
+  public onFileChosen(file: File): void {
+    this.content = file;
   }
 
 }

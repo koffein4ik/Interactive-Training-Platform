@@ -4,6 +4,11 @@
   </div>
   <form [formGroup]="formGroup" class="registration_form">
     <mat-form-field appearance="legacy">
+      <mat-label>Login</mat-label>
+      <input matInput [formControlName]="'login'" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
       <mat-label>First name</mat-label>
       <input matInput [formControlName]="'firstName'" required>
     </mat-form-field>
@@ -21,8 +26,13 @@
     </mat-form-field>
 
     <mat-form-field appearance="legacy">
-      <mat-label>e-mail</mat-label>
+      <mat-label>E-mail</mat-label>
       <input matInput [formControlName]="'email'">
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [formControlName]="'password'">
     </mat-form-field>
 
   </form>

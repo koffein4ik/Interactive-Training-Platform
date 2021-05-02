@@ -1,4 +1,4 @@
-import {LessonModel} from "./lessonModel";
+import {LessonModel} from "./lesson.model";
 
 export class CourseModel {
   id: number;
