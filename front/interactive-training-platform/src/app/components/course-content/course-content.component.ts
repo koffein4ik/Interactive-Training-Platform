@@ -25,6 +25,9 @@ export class CourseContentComponent implements OnInit {
   @Output()
   public onAddCourseContentClick: EventEmitter<SlideContentModel> = new EventEmitter<SlideContentModel>();
 
+  @Output()
+  public onLessonNumberChange: EventEmitter<number> = new EventEmitter<number>();
+
   public readonly TEXT_SLIDE_TYPE: string = SlideContentConstantsModel.TEXT_SLIDE_TYPE;
   public readonly VIDEO_SLIDE_TYPE: string = SlideContentConstantsModel.VIDEO_SLIDE_TYPE;
   public readonly AUDIO_SLIDE_TYPE: string = SlideContentConstantsModel.AUDIO_SLIDE_TYPE;
@@ -40,7 +43,7 @@ export class CourseContentComponent implements OnInit {
   }
 
   public onCourseLessonChange(lessonNumber: number): void {
-    this.currentLessonNumber = lessonNumber;
+    this.onLessonNumberChange.emit(lessonNumber);
   }
 
 }

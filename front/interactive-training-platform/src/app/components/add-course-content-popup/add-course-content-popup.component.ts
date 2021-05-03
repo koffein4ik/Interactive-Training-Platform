@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {SlideContentConstantsModel} from "../../models/slide-content-constants.model";
 import {SlideContentModel} from "../../models/slide-content.model";
-import {FileService} from "../../services/file.service";
 
 @Component({
   selector: 'app-add-course-content-popup',

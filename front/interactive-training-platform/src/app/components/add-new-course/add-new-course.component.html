@@ -38,11 +38,23 @@
     <app-course-content [isAddNewCourse]="true"
                         [course]="createdCourse"
                         [currentLessonNumber]="currentLessonNumber"
-                        (onAddCourseContentClick)="openCourseContentDialog()"
+                        (onAddCourseContentClick)="onCourseContentAdd()"
+                        (onLessonNumberChange)="onCourseLessonNumberChange($event)"
                         (onAddNewLessonClick)="openLessonDialog()"></app-course-content>
 
     <div class="add-new-course-second-step-save">
       <button mat-button color="primary" (click)="onClickSaveSecondStep()">Save</button>
     </div>
+  </div>
+
+  <div class="add-new-course-third-step" *ngIf="currentStep === 3">
+    <app-course-test [isAddNewTest]="true"
+                     [test]="courseTest"
+                     [currentTestQuestionNumber]="currentTestLessonNumber"
+                     (onAddTestQuestion)="onAddTestQuestion()"
+                     (onAddNewTestLessonClick)="onCourseTestLessonAdd()"
+                     (onTestLessonNumberChange)="onTestLessonNumberChange($event)"
+                     (onAddTestContentClick)="onCourseTestContentAdd()">
+    </app-course-test>
   </div>
 </div>

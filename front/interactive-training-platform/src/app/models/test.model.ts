@@ -1,8 +1,7 @@
 import {TestLessonModel} from "./test-lesson.model";
 
-export class CourseTestModel {
+export class TestModel {
   id: number;
   courseId: number;
-  percentsToPass: number;
   testContent: TestLessonModel[];
 }

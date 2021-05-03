@@ -1,10 +1,53 @@
-<label id="example-radio-group-label">Pick your favorite season</label>
-<mat-radio-group
-  aria-labelledby="example-radio-group-label"
-  class="example-radio-group"
-  [(ngModel)]="favoriteSeason">
-  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
-    {{season}}
-  </mat-radio-button>
-</mat-radio-group>
-<div>Your favorite season is: {{favoriteSeason}}</div>
+<div class="radio-button-content-container">
+  <div class="radio-button-content-add-hint-button" *ngIf="isAddNewCourse">
+    <mat-form-field appearance="legacy">
+      <mat-label>Enter title</mat-label>
+      <input matInput #titleInput [(ngModel)]="title">
+    </mat-form-field>
+
+    <button mat-button [disabled]="!titleInput.value" (click)="onAddTitleClick()">Save title</button>
+  </div>
+
+  <div class="radio-button-content-add-button" *ngIf="isAddNewCourse">
+    <mat-form-field appearance="legacy">
+      <mat-label>Enter new option name</mat-label>
+      <input matInput #optionInput [(ngModel)]="newOption">
+    </mat-form-field>
+
+    <button mat-button [disabled]="!optionInput.value" (click)="onAddOptionClick()">Add option</button>
+  </div>
+
+  <div class="radio-button-content-add-hint-button" *ngIf="isAddNewCourse">
+    <mat-form-field appearance="legacy">
+      <mat-label>Enter content</mat-label>
+      <input matInput #hintInput [(ngModel)]="hint">
+    </mat-form-field>
+
+    <button mat-button [disabled]="!hintInput.value" (click)="onAddHintClick()">Save hint</button>
+  </div>
+
+  <div id="radio-button-title" *ngIf="radioButtonContent?.title">
+    {{radioButtonContent.title}}
+  </div>
+
+  <mat-radio-group
+    class="radio-button-content-radio-group"
+    [(ngModel)]="selectedOption">
+    <mat-radio-button class="example-radio-button" *ngFor="let option of radioButtonContent.options; let i = index"
+                      [value]="option" (change)="onSelectedValueChange(i)">
+      {{option}}
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div class="radio-button-content-hint" *ngIf="radioButtonContent.hint && isAddNewCourse">
+    {{radioButtonContent.hint}}
+  </div>
+
+  <div class="radio-button-content-hint" *ngIf="selectedOptionIndex !== -1">
+    <button mat-button (click)="markOptionAsCorrect()">Mark this option as correct</button>
+  </div>
+
+  <div class="radio-button-content-hint" *ngIf="radioButtonContent?.correctOptionNumber !== -1">
+    You've chosen {{radioButtonContent.options[radioButtonContent.correctOptionNumber]}} as correct option
+  </div>
+</div>

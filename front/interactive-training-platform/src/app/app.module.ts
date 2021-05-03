@@ -33,6 +33,9 @@ import {MatSelectModule} from "@angular/material/select";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {APIInterceptor} from "./interceptors/api-interceptor";
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { CourseTestComponent } from './components/course-test/course-test.component';
+import { AddCourseTestQuestionPopupComponent } from './components/add-course-test-question-popup/add-course-test-question-popup.component';
+import { TestQuestionContainerComponent } from './components/test-question-container/test-question-container.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     FooterComponent,
     AddNewLessonPopupComponent,
     AddCourseContentPopupComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    CourseTestComponent,
+    AddCourseTestQuestionPopupComponent,
+    TestQuestionContainerComponent
   ],
   imports: [
     BrowserModule,

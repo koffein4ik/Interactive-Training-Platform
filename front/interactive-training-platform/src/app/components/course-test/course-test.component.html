@@ -1,0 +1,56 @@
+<div class="course-test-container" *ngIf="test">
+  <div class="course-test-navbar">
+    <div class="course-test-navbar-button-add" *ngIf="isAddNewTest">
+      <button mat-icon-button color="primary" (click)="onAddNewTestLessonClick.emit()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div *ngFor="let content of test.testContent; let i = index">
+      <div class="course-test-navbar-button">
+        <button mat-button color="primary" [disabled]="i === currentTestQuestionNumber" (click)="onTestLessonChange(i)">{{i + 1}}</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="course-test-content-container">
+    <div class="course-test-content-number">
+      Question number {{currentTestQuestionNumber + 1}}
+    </div>
+
+    <div class="course-test-navbar-button-add" *ngIf="isAddNewTest">
+      <button mat-button color="primary" (click)="onAddTestContentClick.emit()">Add content</button>
+    </div>
+
+    <div class="course-test-content-container__nav-buttons-container">
+      <button mat-button color="primary" [disabled]="currentTestQuestionNumber === 0" (click)="onTestLessonChange(currentTestQuestionNumber - 1)">Previous question</button>
+      <button mat-button color="primary" [disabled]="currentTestQuestionNumber === test.testContent.length - 1" (click)="onTestLessonChange(currentTestQuestionNumber + 1)">Next question</button>
+    </div>
+
+    <div *ngFor="let content of test.testContent[currentTestQuestionNumber]?.testSlideQuestionContent">
+      <div *ngIf="content.slideContentType === TEXT_SLIDE_TYPE">
+        <app-text-content-container [text]="content.slideContent"></app-text-content-container>
+      </div>
+
+      <div *ngIf="content.slideContentType === VIDEO_SLIDE_TYPE">
+        <app-video-content-container [videoLink]="content.slideContent"></app-video-content-container>
+      </div>
+
+      <div *ngIf="content.slideContentType === AUDIO_SLIDE_TYPE">
+        <app-audio-content-container [audioLink]="content.slideContent"></app-audio-content-container>
+      </div>
+
+      <div *ngIf="content.slideContentType === IMAGE_SLIDE_TYPE">
+        <app-image-content-container [imageLink]="content.slideContent"></app-image-content-container>
+      </div>
+    </div>
+
+    <div class="course-test-container__add-question-button">
+      <button mat-button color="primary" (click)="onAddTestQuestion.emit()">Add question</button>
+    </div>
+
+  </div>
+</div>
+
+
+

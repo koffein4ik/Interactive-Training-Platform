@@ -9,6 +9,13 @@ import {LessonModel} from "../../models/lesson.model";
 import {AddCourseContentPopupComponent} from "../add-course-content-popup/add-course-content-popup.component";
 import {CourseService} from "../../services/course.service";
 import {FileService} from "../../services/file.service";
+import {CourseTestModel} from "../../models/course-test.model";
+import {TestLessonModel} from "../../models/test-lesson.model";
+import {TestQuestionTypesConstantsModel} from "../../models/test-question-types.constants.model";
+import {Observable, of} from "rxjs";
+import {map, switchMap} from "rxjs/operators";
+import {AddCourseTestQuestionPopupComponent} from "../add-course-test-question-popup/add-course-test-question-popup.component";
+import {QuestionFormContentModel} from "../../models/question-form-content.model";
 
 @Component({
   selector: 'app-add-new-course',
@@ -17,8 +24,9 @@ import {FileService} from "../../services/file.service";
 })
 export class AddNewCourseComponent implements OnInit {
 
-  public currentStep: number = 2;
+  public currentStep: number = 3;
   public currentLessonNumber: number = 0;
+  public currentTestLessonNumber: number = 0;
   public courseDescriptionFormGroup: FormGroup;
   public courseImage: string;
   private readonly onlyNumbersRegexp: string = '^[0-9]+$';
@@ -60,6 +68,13 @@ export class AddNewCourseComponent implements OnInit {
     price: 123,
     imagePath: "abcd",
     courseContent: [this.courseContent, this.courseContent2]
+  }
+
+  public courseTest: CourseTestModel = {
+    id: 1,
+    courseId: 1,
+    testContent: [],
+    percentsToPass: 50
   }
 
   constructor(private matDialog: MatDialog,
@@ -108,20 +123,64 @@ export class AddNewCourseComponent implements OnInit {
     }
   }
 
-  public openCourseContentDialog() {
+  public openCourseContentDialog(): Observable<SlideContentModel> {
     const dialogRef = this.matDialog.open(AddCourseContentPopupComponent);
-    dialogRef.afterClosed().subscribe((courseContent: SlideContentModel) => {
-      if (courseContent) {
-        if (courseContent.slideContentType === SlideContentConstantsModel.IMAGE_SLIDE_TYPE || courseContent.slideContentType === SlideContentConstantsModel.AUDIO_SLIDE_TYPE) {
-          this.fileService.uploadFile(courseContent.slideContent)
-            .subscribe((url: string) => {
-              courseContent.slideContent = url;
-              this.createdCourse.courseContent[this.currentLessonNumber].slideContent.push(courseContent);
-            });
-        } else {
-          this.createdCourse.courseContent[this.currentLessonNumber].slideContent.push(courseContent);
-        }
+    return dialogRef.afterClosed()
+      .pipe(
+        switchMap((courseContent: SlideContentModel) => {
+          if (courseContent?.slideContentType === SlideContentConstantsModel.IMAGE_SLIDE_TYPE || courseContent?.slideContentType === SlideContentConstantsModel.AUDIO_SLIDE_TYPE) {
+            return this.fileService.uploadFile(courseContent.slideContent)
+              .pipe(
+                map((url: string) => {
+                  courseContent.slideContent = url;
+                  return courseContent;
+                })
+              )
+          } else {
+            return of(courseContent);
+          }
+        }));
+  }
+
+  public onCourseContentAdd(): void {
+    this.openCourseContentDialog().subscribe((slideContent: SlideContentModel) => {
+      if (slideContent) {
+        this.createdCourse.courseContent[this.currentLessonNumber].slideContent.push(slideContent);
       }
+    });
+  }
+
+  public onCourseTestLessonAdd(): void {
+    const testLesson: TestLessonModel = {
+      testSlideQuestionContent: [],
+      testQuestionForm: {
+        testQuestionContent: [],
+        testQuestionType: TestQuestionTypesConstantsModel.RADIO_BUTTON_QUESTION_TYPE
+      }
+    }
+    this.courseTest.testContent.push(testLesson);
+  }
+
+  public onCourseTestContentAdd(): void {
+    this.openCourseContentDialog().subscribe((slideContent: SlideContentModel) => {
+      if (slideContent) {
+        this.courseTest.testContent[this.currentTestLessonNumber].testSlideQuestionContent.push(slideContent);
+      }
+    });
+  }
+
+  public onCourseLessonNumberChange(lessonNumber: number): void {
+    this.currentLessonNumber = lessonNumber;
+  }
+
+  public onTestLessonNumberChange(lessonNumber: number): void {
+    this.currentTestLessonNumber = lessonNumber;
+  }
+
+  public onAddTestQuestion(): void {
+    const dialogRef = this.matDialog.open(AddCourseTestQuestionPopupComponent);
+    dialogRef.afterClosed().subscribe((questionModel: QuestionFormContentModel) => {
+      console.log(questionModel);
     });
   }
 

@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Add test question</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose an option</mat-label>
+    <mat-select [(value)]="selectedOption" (valueChange)="onSelectedOptionChange()">
+      <mat-option [value]="RADIO_BUTTON_QUESTION_TYPE">{{RADIO_BUTTON_QUESTION_TYPE}}</mat-option>
+      <mat-option [value]="TEXT_QUESTION_TYPE">{{TEXT_QUESTION_TYPE}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="add-course-test-question-content-popup-text" *ngIf="selectedOption === RADIO_BUTTON_QUESTION_TYPE">
+    <app-radio-button-content-container
+      [isAddNewCourse]="true"
+      [radioButtonContent]="content" (onRadioButtonModify)="onContentUpdate($event)">
+    </app-radio-button-content-container>
+  </div>
+
+  <div class="add-course-test-question-content-popup-text" *ngIf="selectedOption === TEXT_QUESTION_TYPE">
+
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button cdkFocusInitial [disabled]="!isCourseTestQuestionValid()" (click)="onSave()">OK</button>
+</div>
