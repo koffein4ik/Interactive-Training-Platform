@@ -35,7 +35,10 @@ export class AddCourseTestQuestionPopupComponent implements OnInit {
         title: ""
       };
     } else if (this.selectedOption === this.TEXT_QUESTION_TYPE) {
-
+      this.content = {
+        question: "",
+        answer: ""
+      }
     }
   }
 
@@ -43,7 +46,7 @@ export class AddCourseTestQuestionPopupComponent implements OnInit {
     if (this.selectedOption === this.RADIO_BUTTON_QUESTION_TYPE) {
       return this.content.options.length > 1 && this.content.correctOptionNumber !== -1 && this.content.title;
     } else if (this.selectedOption === this.TEXT_QUESTION_TYPE) {
-      return true;
+      return this.content.answer && this.content.question;
     }
   }
 

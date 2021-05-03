@@ -16,7 +16,11 @@
   </div>
 
   <div class="add-course-test-question-content-popup-text" *ngIf="selectedOption === TEXT_QUESTION_TYPE">
-
+    <app-test-question-container
+      [isAddNewCourse]="true"
+      [testTextQuestion]="content"
+      (onQuestionModify)="onContentUpdate($event)">
+    </app-test-question-container>
   </div>
 </div>
 <div mat-dialog-actions>

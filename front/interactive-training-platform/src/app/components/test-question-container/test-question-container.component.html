@@ -1,0 +1,41 @@
+<div class="test-question-container" *ngIf="testTextQuestion">
+  <div class="test-question-text-add" *ngIf="isAddNewCourse">
+    <mat-form-field appearance="legacy">
+      <mat-label>Enter enter question text</mat-label>
+      <input matInput #addQuestionInput [(ngModel)]="questionText">
+    </mat-form-field>
+    <button mat-button [disabled]="!addQuestionInput.value" (click)="onAddQuestion()">Save question</button>
+  </div>
+
+  <div class="test-question-answer-add" *ngIf="isAddNewCourse">
+    <mat-form-field appearance="legacy">
+      <mat-label>Enter question answer</mat-label>
+      <input matInput #addAnswerInput [(ngModel)]="questionAnswer">
+    </mat-form-field>
+    <button mat-button [disabled]="!addAnswerInput.value" (click)="onAddAnswer()">Save answer</button>
+  </div>
+
+  <div class="test-question-content" *ngIf="testTextQuestion.question">
+    <div class="test-question-content-text">
+      {{testTextQuestion.question}}
+    </div>
+
+    <div class="test-question-content-correct-answer" *ngIf="isAddNewCourse && testTextQuestion.answer">
+      <div class="test-question-content-correct-answer-label">
+        Answer you entered is:
+      </div>
+
+      <div class="test-question-content-correct-answer-value">
+        {{testTextQuestion.answer}}
+      </div>
+    </div>
+
+    <div class="test-question-content-answer-field" *ngIf="!isAddNewCourse && testTextQuestion.answer">
+      <mat-form-field appearance="legacy">
+        <mat-label>Enter your answer here</mat-label>
+        <input matInput #userAnswerInput [(ngModel)]="userAnswer">
+      </mat-form-field>
+      <button mat-button [disabled]="!userAnswerInput.value" (click)="onSaveAnswer()">Save answer</button>
+    </div>
+  </div>
+</div>
