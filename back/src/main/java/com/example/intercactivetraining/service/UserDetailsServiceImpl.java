@@ -1,6 +1,6 @@
 package com.example.intercactivetraining.service;
 
-import com.example.intercactivetraining.model.UsersEntity;
+import com.example.intercactivetraining.model.UserEntity;
 import com.example.intercactivetraining.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,14 +21,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UsersEntity userEntity = findByLogin(username);
+        UserEntity userEntity = findByLogin(username);
         if (userEntity == null) {
             throw  new UsernameNotFoundException("Invalid username or password");
         }
         return new User(userEntity.getLogin(), userEntity.getPassword(), getAuthority());
     }
 
-    private UsersEntity findByLogin(String login) {
+    private UserEntity findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
 

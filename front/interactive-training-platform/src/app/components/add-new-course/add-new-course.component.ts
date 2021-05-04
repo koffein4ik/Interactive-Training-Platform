@@ -16,6 +16,10 @@ import {Observable, of} from "rxjs";
 import {map, switchMap} from "rxjs/operators";
 import {AddCourseTestQuestionPopupComponent} from "../add-course-test-question-popup/add-course-test-question-popup.component";
 import {QuestionFormContentModel} from "../../models/question-form-content.model";
+import {TestService} from "../../services/test.service";
+import {TestQuestionAnswerModel} from "../../models/test-question-answer.model";
+import {RadioButtonQuestionModel} from "../../models/radio-button-question.model";
+import {TestTextQuestionModel} from "../../models/test-text-question.model";
 
 @Component({
   selector: 'app-add-new-course',
@@ -24,11 +28,12 @@ import {QuestionFormContentModel} from "../../models/question-form-content.model
 })
 export class AddNewCourseComponent implements OnInit {
 
-  public currentStep: number = 3;
+  public currentStep: number = 2;
   public currentLessonNumber: number = 0;
   public currentTestLessonNumber: number = 0;
   public courseDescriptionFormGroup: FormGroup;
-  public courseImage: string;
+  public courseImage: File;
+  public courseId: number;
   private readonly onlyNumbersRegexp: string = '^[0-9]+$';
 
   public textContent: SlideContentModel = {
@@ -70,16 +75,12 @@ export class AddNewCourseComponent implements OnInit {
     courseContent: [this.courseContent, this.courseContent2]
   }
 
-  public courseTest: CourseTestModel = {
-    id: 1,
-    courseId: 1,
-    testContent: [],
-    percentsToPass: 50
-  }
+  public courseTest: CourseTestModel;
 
   constructor(private matDialog: MatDialog,
               private courseService: CourseService,
-              private fileService: FileService) {
+              private fileService: FileService,
+              private testService: TestService) {
   }
 
   public ngOnInit(): void {
@@ -98,15 +99,58 @@ export class AddNewCourseComponent implements OnInit {
       name: this.courseDescriptionFormGroup.controls["courseName"].value,
       shortDescription: this.courseDescriptionFormGroup.controls["courseShortDescription"].value,
       fullDescription: this.courseDescriptionFormGroup.controls["courseFullDescription"].value,
-      imagePath: null,
+      imagePath: "",
       price: this.courseDescriptionFormGroup.controls["coursePrice"].value,
       courseContent: []
     }
+    this.fileService.uploadFile(this.courseImage).subscribe((url: string) => this.createdCourse.imagePath = url);
     this.currentStep = 2;
   }
 
   public onClickSaveSecondStep(): void {
+    this.courseTest = {
+      id: 1,
+      courseId: 1,
+      testContent: [],
+      percentsToPass: 50
+    };
+    this.onCourseTestLessonAdd();
     this.currentStep = 3;
+  }
+
+  public onClickSaveThirdStep(): void {
+    console.log(this.createdCourse);
+    console.log(this.courseTest);
+    this.courseService.saveCourse(this.createdCourse)
+      .pipe(
+        switchMap((courseId: string) => {
+          this.courseTest.courseId = +courseId;
+          return this.testService.saveTest(this.courseTest);
+        }),
+        switchMap((testId: string) => {
+          return this.testService.saveTestQuestionAnswers(this.getTestQuestionAnswerModels(+testId));
+        })
+      )
+      .subscribe(() => alert("Course was created successfully"));
+  }
+
+  private getTestQuestionAnswerModels(testId: number): TestQuestionAnswerModel[] {
+    const answers: TestQuestionAnswerModel[] = [];
+    this.courseTest.testContent.forEach((testLessonModel: TestLessonModel, index: number) => {
+      let answer: string;
+      if (testLessonModel.testQuestionForm.testQuestionType === TestQuestionTypesConstantsModel.RADIO_BUTTON_QUESTION_TYPE) {
+        answer = ((<RadioButtonQuestionModel>testLessonModel.testQuestionForm.testQuestionContent).correctOptionNumber).toString();
+      } else if (testLessonModel.testQuestionForm.testQuestionType === TestQuestionTypesConstantsModel.TEXT_QUESTION_TYPE) {
+        answer = (<TestTextQuestionModel>testLessonModel.testQuestionForm.testQuestionContent).answer;
+      }
+      const correctAnswer: TestQuestionAnswerModel = {
+        questionAnswer: answer,
+        questionNumber: index,
+        testId: testId
+      };
+      answers.push(correctAnswer);
+    });
+    return answers;
   }
 
   public openLessonDialog() {
@@ -118,7 +162,7 @@ export class AddNewCourseComponent implements OnInit {
 
   public addNewLesson(lessonName: string): void {
     if (lessonName) {
-      this.createdCourse.courseContent.push({name: lessonName, slideContent: []});
+      (<LessonModel[]>this.createdCourse.courseContent).push({name: lessonName, slideContent: []});
       this.currentLessonNumber = this.createdCourse.courseContent.length - 1;
     }
   }
@@ -145,7 +189,7 @@ export class AddNewCourseComponent implements OnInit {
   public onCourseContentAdd(): void {
     this.openCourseContentDialog().subscribe((slideContent: SlideContentModel) => {
       if (slideContent) {
-        this.createdCourse.courseContent[this.currentLessonNumber].slideContent.push(slideContent);
+        (<LessonModel>this.createdCourse.courseContent[this.currentLessonNumber]).slideContent.push(slideContent);
       }
     });
   }
@@ -180,12 +224,13 @@ export class AddNewCourseComponent implements OnInit {
   public onAddTestQuestion(): void {
     const dialogRef = this.matDialog.open(AddCourseTestQuestionPopupComponent);
     dialogRef.afterClosed().subscribe((questionModel: QuestionFormContentModel) => {
+      this.courseTest.testContent[this.currentTestLessonNumber].testQuestionForm = questionModel;
       console.log(questionModel);
     });
   }
 
   public onCourseImageChosen(file: File): void {
-    //this.fileService.uploadFile()
+    this.courseImage = file;
   }
 
 }

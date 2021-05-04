@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {QuestionFormContentModel} from "../../models/question-form-content.model";
 import {TestQuestionTypesConstantsModel} from "../../models/test-question-types.constants.model";
-import {RadioButtonQuestionModel} from "../../models/radio-button-question.model";
 
 @Component({
   selector: 'app-add-course-test-question-popup',

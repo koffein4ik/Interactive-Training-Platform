@@ -29,7 +29,7 @@
         (onFileChosen)="onCourseImageChosen($event)"></app-file-upload>
     </div>
 
-    <div class="add-new-course-first-step-save">
+    <div class="add-new-course-step-save">
       <button mat-button color="primary" [disabled]="courseDescriptionFormGroup.invalid" (click)="onClickSaveFirstStep()">Save</button>
     </div>
   </div>
@@ -42,7 +42,7 @@
                         (onLessonNumberChange)="onCourseLessonNumberChange($event)"
                         (onAddNewLessonClick)="openLessonDialog()"></app-course-content>
 
-    <div class="add-new-course-second-step-save">
+    <div class="add-new-course-step-save">
       <button mat-button color="primary" (click)="onClickSaveSecondStep()">Save</button>
     </div>
   </div>
@@ -56,5 +56,9 @@
                      (onTestLessonNumberChange)="onTestLessonNumberChange($event)"
                      (onAddTestContentClick)="onCourseTestContentAdd()">
     </app-course-test>
+
+    <div class="add-new-course-step-save">
+      <button mat-button color="primary" (click)="onClickSaveThirdStep()">Save</button>
+    </div>
   </div>
 </div>

@@ -19,7 +19,7 @@
 
   <div class="radio-button-content-add-hint-button" *ngIf="isAddNewCourse">
     <mat-form-field appearance="legacy">
-      <mat-label>Enter content</mat-label>
+      <mat-label>Enter hint</mat-label>
       <input matInput #hintInput [(ngModel)]="hint">
     </mat-form-field>
 
@@ -43,11 +43,11 @@
     {{radioButtonContent.hint}}
   </div>
 
-  <div class="radio-button-content-hint" *ngIf="selectedOptionIndex !== -1">
+  <div class="radio-button-content-hint" *ngIf="selectedOptionIndex !== -1 && radioButtonContent.options && isAddNewCourse">
     <button mat-button (click)="markOptionAsCorrect()">Mark this option as correct</button>
   </div>
 
-  <div class="radio-button-content-hint" *ngIf="radioButtonContent?.correctOptionNumber !== -1">
+  <div class="radio-button-content-hint" *ngIf="radioButtonContent?.correctOptionNumber !== -1 && radioButtonContent.options && isAddNewCourse">
     You've chosen {{radioButtonContent.options[radioButtonContent.correctOptionNumber]}} as correct option
   </div>
 </div>

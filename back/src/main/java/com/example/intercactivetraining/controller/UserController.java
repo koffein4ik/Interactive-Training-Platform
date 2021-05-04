@@ -1,7 +1,7 @@
 package com.example.intercactivetraining.controller;
 
 import com.example.intercactivetraining.model.ResponseViewModel;
-import com.example.intercactivetraining.model.UsersEntity;
+import com.example.intercactivetraining.model.UserEntity;
 import com.example.intercactivetraining.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("regNewUser")
-    public ResponseViewModel regNewUser(@RequestBody UsersEntity user) {
+    public ResponseViewModel regNewUser(@RequestBody UserEntity user) {
         return this.userService.saveUser(user);
     }
 }

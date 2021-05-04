@@ -13,7 +13,11 @@
     </div>
   </div>
 
-  <div class="course-content-container">
+  <div class="course-content-no-lessons" *ngIf="!course.courseContent.length">
+    You must create lesson to add content
+  </div>
+
+  <div class="course-content-container" *ngIf="course.courseContent.length">
     <div class="course-content-number">
       Lesson number {{currentLessonNumber + 1}}
     </div>
@@ -27,7 +31,7 @@
       <button mat-button color="primary" [disabled]="currentLessonNumber === course.courseContent.length - 1" (click)="onCourseLessonChange(currentLessonNumber + 1)">Next lesson</button>
     </div>
 
-    <div *ngFor="let content of course.courseContent[currentLessonNumber].slideContent">
+    <div *ngFor="let content of course.courseContent[currentLessonNumber]?.slideContent">
       <div *ngIf="content.slideContentType === TEXT_SLIDE_TYPE">
         <app-text-content-container [text]="content.slideContent"></app-text-content-container>
       </div>

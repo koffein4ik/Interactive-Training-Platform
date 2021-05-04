@@ -1,7 +1,5 @@
 package com.example.intercactivetraining.security;
 
-import com.example.intercactivetraining.model.UsersEntity;
-import com.example.intercactivetraining.repository.UserRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import org.springframework.beans.factory.annotation.Autowired;

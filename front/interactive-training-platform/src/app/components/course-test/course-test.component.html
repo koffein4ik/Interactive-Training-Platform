@@ -11,6 +11,23 @@
         <button mat-button color="primary" [disabled]="i === currentTestQuestionNumber" (click)="onTestLessonChange(i)">{{i + 1}}</button>
       </div>
     </div>
+
+    <div class="course-test-navbar-percent-container">
+      <div class="course-test-navbar-percent">
+        Required percent of correct answers to pass test is {{test.percentsToPass}}
+
+        <button mat-button color="primary" (click)="togglePercentsEditingMode()" *ngIf="!editingPercentsMode">Change</button>
+
+        <div class="course-test-navbar-percent-edit" *ngIf="editingPercentsMode">
+          <mat-form-field>
+            <mat-label>Percents amount</mat-label>
+            <input matInput [(ngModel)]="percents">
+          </mat-form-field>
+
+          <button mat-button color="primary" (click)="saveUpdatedPercents()">Save</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="course-test-content-container">
@@ -47,6 +64,20 @@
 
     <div class="course-test-container__add-question-button">
       <button mat-button color="primary" (click)="onAddTestQuestion.emit()">Add question</button>
+    </div>
+
+    <div class="course-test-question-container" *ngIf="test.testContent[currentTestQuestionNumber]?.testQuestionForm as questionContent">
+      <div class="course-test-question-radio-button-container" *ngIf="questionContent.testQuestionType === RADIO_BUTTON_QUESTION_TYPE">
+        <app-radio-button-content-container
+          [radioButtonContent]="questionContent.testQuestionContent">
+        </app-radio-button-content-container>
+      </div>
+
+      <div class="course-test-question-text-container" *ngIf="questionContent.testQuestionType === TEXT_QUESTION_TYPE">
+        <app-test-question-container
+          [testTextQuestion]="questionContent.testQuestionContent">
+        </app-test-question-container>
+      </div>
     </div>
 
   </div>

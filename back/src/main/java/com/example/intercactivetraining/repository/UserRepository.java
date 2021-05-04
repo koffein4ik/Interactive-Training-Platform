@@ -1,9 +1,9 @@
 package com.example.intercactivetraining.repository;
 
-import com.example.intercactivetraining.model.UsersEntity;
+import com.example.intercactivetraining.model.UserEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface UserRepository extends PagingAndSortingRepository<UsersEntity, Integer> {
-    UsersEntity findByLogin(String login);
-    UsersEntity findByLoginOrEmail(String login, String email);
+public interface UserRepository extends PagingAndSortingRepository<UserEntity, Integer> {
+    UserEntity findByLogin(String login);
+    UserEntity findByLoginOrEmail(String login, String email);
 }

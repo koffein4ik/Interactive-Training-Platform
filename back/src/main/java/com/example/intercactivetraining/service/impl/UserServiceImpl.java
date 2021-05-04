@@ -1,7 +1,7 @@
 package com.example.intercactivetraining.service.impl;
 
 import com.example.intercactivetraining.model.ResponseViewModel;
-import com.example.intercactivetraining.model.UsersEntity;
+import com.example.intercactivetraining.model.UserEntity;
 import com.example.intercactivetraining.repository.UserRepository;
 import com.example.intercactivetraining.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,20 +26,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseViewModel saveUser(UsersEntity usersEntity) {
+    public ResponseViewModel saveUser(UserEntity userEntity) {
         ResponseViewModel responseViewModel = new ResponseViewModel();
-        if (checkIfUserAlreadyExist(usersEntity)) {
+        if (checkIfUserAlreadyExist(userEntity)) {
             responseViewModel.setErrorOccurred(true);
             responseViewModel.setErrorMessage("User with such login or email already exists");
         } else {
-            usersEntity.setPassword(bCryptPasswordEncoder.encode(usersEntity.getPassword()));
-            userRepository.save(usersEntity);
+            userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
+            userRepository.save(userEntity);
         }
         return responseViewModel;
     }
 
-    private boolean checkIfUserAlreadyExist(UsersEntity usersEntity) {
-        UsersEntity user = userRepository.findByLoginOrEmail(usersEntity.getLogin(), usersEntity.getEmail());
+    private boolean checkIfUserAlreadyExist(UserEntity userEntity) {
+        UserEntity user = userRepository.findByLoginOrEmail(userEntity.getLogin(), userEntity.getEmail());
         return user != null;
     }
 }

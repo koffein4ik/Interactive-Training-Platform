@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {CourseModel} from "../models/course.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,15 @@ export class CourseService {
 
   public test(): Observable<string> {
     return this.http.get<string>(this.COURSE_API + "test");
+  }
+
+  public saveCourse(course: CourseModel): Observable<string> {
+    const options: Object = {
+      headers: new HttpHeaders(),
+      responseType: 'text'
+    }
+    const courseCopy: any = JSON.parse(JSON.stringify(course));
+    courseCopy.courseContent = JSON.stringify(course.courseContent);
+    return this.http.post<string>(this.COURSE_API + "saveCourse", courseCopy, options);
   }
 }

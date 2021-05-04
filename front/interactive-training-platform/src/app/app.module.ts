@@ -36,6 +36,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { CourseTestComponent } from './components/course-test/course-test.component';
 import { AddCourseTestQuestionPopupComponent } from './components/add-course-test-question-popup/add-course-test-question-popup.component';
 import { TestQuestionContainerComponent } from './components/test-question-container/test-question-container.component';
+import { PercentsToPassPopupComponent } from './components/percents-to-pass-popup/percents-to-pass-popup.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { TestQuestionContainerComponent } from './components/test-question-conta
     FileUploadComponent,
     CourseTestComponent,
     AddCourseTestQuestionPopupComponent,
-    TestQuestionContainerComponent
+    TestQuestionContainerComponent,
+    PercentsToPassPopupComponent
   ],
   imports: [
     BrowserModule,

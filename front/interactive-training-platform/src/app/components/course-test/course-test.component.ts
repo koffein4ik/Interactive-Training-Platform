@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CourseTestModel} from "../../models/course-test.model";
 import {SlideContentConstantsModel} from "../../models/slide-content-constants.model";
+import {TestQuestionTypesConstantsModel} from "../../models/test-question-types.constants.model";
 
 @Component({
   selector: 'app-course-test',
@@ -30,14 +31,24 @@ export class CourseTestComponent implements OnInit {
   @Output()
   public onAddTestQuestion: EventEmitter<void> = new EventEmitter<void>();
 
+  public editingPercentsMode: boolean;
+  public percents: number;
+
   public readonly TEXT_SLIDE_TYPE: string = SlideContentConstantsModel.TEXT_SLIDE_TYPE;
   public readonly VIDEO_SLIDE_TYPE: string = SlideContentConstantsModel.VIDEO_SLIDE_TYPE;
   public readonly AUDIO_SLIDE_TYPE: string = SlideContentConstantsModel.AUDIO_SLIDE_TYPE;
   public readonly IMAGE_SLIDE_TYPE: string = SlideContentConstantsModel.IMAGE_SLIDE_TYPE;
 
+  public readonly RADIO_BUTTON_QUESTION_TYPE: string = TestQuestionTypesConstantsModel.RADIO_BUTTON_QUESTION_TYPE;
+  public readonly TEXT_QUESTION_TYPE: string = TestQuestionTypesConstantsModel.TEXT_QUESTION_TYPE;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public togglePercentsEditingMode(): void {
+    this.editingPercentsMode = !this.editingPercentsMode;
   }
 
   public onTestLessonChange(newQuestionNumber: number): void {

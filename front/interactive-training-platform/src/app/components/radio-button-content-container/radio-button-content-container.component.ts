@@ -1,6 +1,5 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {RadioButtonQuestionModel} from "../../models/radio-button-question.model";
-import {MatInput} from "@angular/material/input";
 
 @Component({
   selector: 'app-radio-button-content-container',

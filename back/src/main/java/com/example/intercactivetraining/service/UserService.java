@@ -1,9 +1,9 @@
 package com.example.intercactivetraining.service;
 
 import com.example.intercactivetraining.model.ResponseViewModel;
-import com.example.intercactivetraining.model.UsersEntity;
+import com.example.intercactivetraining.model.UserEntity;
 
 public interface UserService {
     int getUserId();
-    ResponseViewModel saveUser(UsersEntity usersEntity);
+    ResponseViewModel saveUser(UserEntity userEntity);
 }
