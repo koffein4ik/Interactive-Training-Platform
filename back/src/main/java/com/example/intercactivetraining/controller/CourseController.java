@@ -31,4 +31,14 @@ public class CourseController {
         courseEntity.setAuthorId(userId);
         return courseService.saveCourse(courseEntity);
     }
+
+    @GetMapping("/getAllCourses")
+    public Iterable<CourseEntity> getAllCourses() {
+        return this.courseService.getAllCourses();
+    }
+
+    @GetMapping("/getCourseById/{id}")
+    public CourseEntity getCourseById(@PathVariable(name = "id") String id) {
+        return this.courseService.getCourseById(id);
+    }
 }

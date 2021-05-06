@@ -26,4 +26,12 @@ export class CourseService {
     courseCopy.courseContent = JSON.stringify(course.courseContent);
     return this.http.post<string>(this.COURSE_API + "saveCourse", courseCopy, options);
   }
+
+  public getAllCourses(): Observable<CourseModel[]> {
+    return this.http.get<CourseModel[]>(this.COURSE_API + "getAllCourses");
+  }
+
+  public getCourseById(id: number): Observable<CourseModel> {
+    return this.http.get<CourseModel>(this.COURSE_API + "getCourseById/" + id);
+  }
 }

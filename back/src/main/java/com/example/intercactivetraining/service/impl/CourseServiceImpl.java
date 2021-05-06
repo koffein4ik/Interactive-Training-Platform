@@ -18,4 +18,14 @@ public class CourseServiceImpl implements CourseService {
     public int saveCourse(CourseEntity courseEntity) {
         return courseRepository.save(courseEntity).getId();
     }
+
+    @Override
+    public Iterable<CourseEntity> getAllCourses() {
+        return courseRepository.findAll();
+    }
+
+    @Override
+    public CourseEntity getCourseById(String id) {
+        return courseRepository.findById(Integer.parseInt(id)).orElse(null);
+    }
 }

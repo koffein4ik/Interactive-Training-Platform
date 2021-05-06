@@ -1,0 +1,31 @@
+<div class="course-full-description-container">
+  <div class="course-full-description-content" *ngIf="course">
+    <div class="course-full-description-name">
+      {{course.name}}
+    </div>
+
+    <div class="course-full-description-image">
+      <img [src]="course.imagePath">
+    </div>
+
+    <div class="course-full-description-text">
+      {{course.fullDescription}}
+    </div>
+
+    <div class="course-full-description-price">
+      {{course.price}}
+    </div>
+
+    <div class="course-full-description-enroll-button" *ngIf="!userCourseStatus">
+      <button mat-button (click)="onCourseEnrollClick()">Enroll</button>
+    </div>
+
+    <div class="course-full-description-user-status" *ngIf="userCourseStatus">
+      {{userCourseStatus.status.statusName}}
+    </div>
+
+    <div class="course-full-description-reviews-container">
+
+    </div>
+  </div>
+</div>

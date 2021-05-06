@@ -233,4 +233,8 @@ export class AddNewCourseComponent implements OnInit {
     this.courseImage = file;
   }
 
+  public onTestInfoUpdate(test: CourseTestModel) {
+    console.log(this.courseTest);
+  }
+
 }

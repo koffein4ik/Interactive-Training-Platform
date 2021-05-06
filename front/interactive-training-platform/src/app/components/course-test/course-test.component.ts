@@ -55,4 +55,9 @@ export class CourseTestComponent implements OnInit {
     this.onTestLessonNumberChange.emit(newQuestionNumber)
   }
 
+  public saveUpdatedPercents(): void {
+    this.test.percentsToPass = this.percents;
+    this.togglePercentsEditingMode();
+  }
+
 }

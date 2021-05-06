@@ -37,6 +37,11 @@ import { CourseTestComponent } from './components/course-test/course-test.compon
 import { AddCourseTestQuestionPopupComponent } from './components/add-course-test-question-popup/add-course-test-question-popup.component';
 import { TestQuestionContainerComponent } from './components/test-question-container/test-question-container.component';
 import { PercentsToPassPopupComponent } from './components/percents-to-pass-popup/percents-to-pass-popup.component';
+import { AllCoursesComponent } from './components/all-courses/all-courses.component';
+import { CourseCardComponent } from './components/course-card/course-card.component';
+import { CourseFullDescriptionComponent } from './components/course-full-description/course-full-description.component';
+import { MyCoursesComponent } from './components/my-courses/my-courses.component';
+import { MyCreatedCoursesComponent } from './components/my-created-courses/my-created-courses.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +66,12 @@ import { PercentsToPassPopupComponent } from './components/percents-to-pass-popu
     CourseTestComponent,
     AddCourseTestQuestionPopupComponent,
     TestQuestionContainerComponent,
-    PercentsToPassPopupComponent
+    PercentsToPassPopupComponent,
+    AllCoursesComponent,
+    CourseCardComponent,
+    CourseFullDescriptionComponent,
+    MyCoursesComponent,
+    MyCreatedCoursesComponent
   ],
   imports: [
     BrowserModule,

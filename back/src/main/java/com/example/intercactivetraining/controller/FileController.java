@@ -3,6 +3,7 @@ package com.example.intercactivetraining.controller;
 import com.example.intercactivetraining.service.FileService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,8 +17,9 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    private FileService fileService;
+    private final FileService fileService;
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping(value = "/uploadCourseContentFile", headers = {"content-type=multipart/form-data"})
     public String uploadCourseContentFile(@RequestParam("fileKey") MultipartFile file) {
         try {

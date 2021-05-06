@@ -1,0 +1,20 @@
+<div class="my-created-courses-container">
+  <div class="my-created-courses-user-status-container">
+    <div class="my-created-courses-user-status-content" *ngFor="let status of userCourseStatuses; let i = index">
+      {{status.course.name}}
+      {{status.status.statusName}}
+      {{status.user.firstName}}
+      {{status.user.lastName}}
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose new status</mat-label>
+        <mat-select #selectedStatus>
+          <mat-option [value]="'Applied'">Applied</mat-option>
+          <mat-option [value]="'Available'">Available</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-button (click)="onUserCourseStatusChange(i, selectedStatus.value)">Save</button>
+    </div>
+  </div>
+</div>

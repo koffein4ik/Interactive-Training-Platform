@@ -1,4 +1,4 @@
-package com.example.intercactivetraining.service;
+package com.example.intercactivetraining.service.impl;
 
 import com.example.intercactivetraining.model.UserEntity;
 import com.example.intercactivetraining.repository.UserRepository;
