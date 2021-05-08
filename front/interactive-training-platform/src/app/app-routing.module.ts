@@ -7,6 +7,7 @@ import {AllCoursesComponent} from "./components/all-courses/all-courses.componen
 import {CourseFullDescriptionComponent} from "./components/course-full-description/course-full-description.component";
 import {MyCoursesComponent} from "./components/my-courses/my-courses.component";
 import {MyCreatedCoursesComponent} from "./components/my-created-courses/my-created-courses.component";
+import {CoursePageComponent} from "./components/course-page/course-page.component";
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: "", component: AllCoursesComponent},
   {path: "course/:id", component: CourseFullDescriptionComponent},
   {path: "my-courses", component: MyCoursesComponent},
-  {path: "my-created-courses", component: MyCreatedCoursesComponent}
+  {path: "my-created-courses", component: MyCreatedCoursesComponent},
+  {path: "course-content/:id", component: CoursePageComponent}
 ];
 
 @NgModule({

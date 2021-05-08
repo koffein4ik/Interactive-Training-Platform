@@ -24,6 +24,8 @@ export class MyCreatedCoursesComponent implements OnInit {
   }
 
   public onUserCourseStatusChange(index: number, selectedStatus: string): void {
+    this.userCourseStatuses[index].status = this.courseStatuses.find((status: CourseStatusModel) => status.statusName === selectedStatus);
+    this.userCourseStatusService.updateUserCourseStatus(this.userCourseStatuses[index]).subscribe();
   }
 
 }

@@ -13,4 +13,6 @@ public interface CourseStatusService {
     Iterable<UserCourseStatusEntity> getUserCourseStatusesByAuthor(int authorId);
 
     Iterable<CourseStatusEntity> getAllCourseStatuses();
+
+    UserCourseStatusEntity updateCourseStatus(UserCourseStatusEntity userCourseStatusEntity);
 }

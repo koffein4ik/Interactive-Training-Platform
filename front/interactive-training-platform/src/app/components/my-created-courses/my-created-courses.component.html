@@ -9,8 +9,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Choose new status</mat-label>
         <mat-select #selectedStatus>
-          <mat-option [value]="'Applied'">Applied</mat-option>
-          <mat-option [value]="'Available'">Available</mat-option>
+          <mat-option *ngFor="let status of courseStatuses" [value]="status.statusName">{{status.statusName}}</mat-option>
         </mat-select>
       </mat-form-field>
 

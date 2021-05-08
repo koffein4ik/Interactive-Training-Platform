@@ -29,4 +29,9 @@ public class TestServiceImpl implements TestService {
     public void saveTestQuestionAnswers(TestQuestionAnswerEntity[] testQuestionAnswers) {
         testQuestionAnswerRepository.saveAll(Arrays.asList(testQuestionAnswers.clone()));
     }
+
+    @Override
+    public TestEntity getCourseTest(int courseId) {
+        return testRepository.findByCourseId(courseId).orElse(null);
+    }
 }

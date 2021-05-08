@@ -28,6 +28,9 @@ export class CourseContentComponent implements OnInit {
   @Output()
   public onLessonNumberChange: EventEmitter<number> = new EventEmitter<number>();
 
+  @Output()
+  public onGoToTestClick: EventEmitter<void> = new EventEmitter<void>();
+
   public readonly TEXT_SLIDE_TYPE: string = SlideContentConstantsModel.TEXT_SLIDE_TYPE;
   public readonly VIDEO_SLIDE_TYPE: string = SlideContentConstantsModel.VIDEO_SLIDE_TYPE;
   public readonly AUDIO_SLIDE_TYPE: string = SlideContentConstantsModel.AUDIO_SLIDE_TYPE;
@@ -37,13 +40,16 @@ export class CourseContentComponent implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
-    // for (let i = 0; i < 30; i++) {
-    //   this.course.courseContent.push(this.courseContent2);
-    // }
+
   }
 
   public onCourseLessonChange(lessonNumber: number): void {
+    this.currentLessonNumber = lessonNumber;
     this.onLessonNumberChange.emit(lessonNumber);
+  }
+
+  public goToTest(): void {
+    this.onGoToTestClick.emit();
   }
 
 }

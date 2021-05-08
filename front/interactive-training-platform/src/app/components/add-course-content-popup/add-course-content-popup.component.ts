@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {SlideContentConstantsModel} from "../../models/slide-content-constants.model";
 import {SlideContentModel} from "../../models/slide-content.model";
+import {RadioButtonQuestionModel} from "../../models/radio-button-question.model";
 
 @Component({
   selector: 'app-add-course-content-popup',
@@ -11,7 +12,7 @@ import {SlideContentModel} from "../../models/slide-content.model";
 export class AddCourseContentPopupComponent implements OnInit {
 
   public selectedOption: string;
-
+  public radioButtonModel: RadioButtonQuestionModel;
   public content: any;
 
   public readonly TEXT_SLIDE_TYPE: string = SlideContentConstantsModel.TEXT_SLIDE_TYPE;
@@ -23,11 +24,21 @@ export class AddCourseContentPopupComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<AddCourseContentPopupComponent>) { }
 
   public ngOnInit(): void {
-
+    this.initRadioButtonOption();
   }
 
   public onSelectedOptionChange(): void {
     this.content = "";
+    this.initRadioButtonOption();
+  }
+
+  public initRadioButtonOption(): void {
+    this.radioButtonModel = {
+      options: [],
+      hint: "",
+      title: "",
+      correctOptionNumber: -1
+    }
   }
 
   public onNoClick(): void {
@@ -35,6 +46,9 @@ export class AddCourseContentPopupComponent implements OnInit {
   }
 
   public onSave(): void {
+    if (this.selectedOption === this.RADIO_BUTTON_SLIDE_TYPE) {
+      this.content = this.radioButtonModel;
+    }
     const slideContent: SlideContentModel = {
       slideContentType: this.selectedOption,
       slideContent: this.content

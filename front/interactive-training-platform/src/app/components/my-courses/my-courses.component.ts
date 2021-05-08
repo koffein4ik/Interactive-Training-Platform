@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserCourseStatusService} from "../../services/user-course-status.service";
 import {UserCourseStatusModel} from "../../models/user-course-status.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-my-courses',
@@ -11,7 +12,7 @@ export class MyCoursesComponent implements OnInit {
 
   public courseStatuses: UserCourseStatusModel[];
 
-  constructor(private userCourseStatusService: UserCourseStatusService) {
+  constructor(private userCourseStatusService: UserCourseStatusService, private router: Router) {
   }
 
   public ngOnInit(): void {
@@ -19,8 +20,8 @@ export class MyCoursesComponent implements OnInit {
       .subscribe((statuses: UserCourseStatusModel[]) => this.courseStatuses = statuses);
   }
 
-  public onStartCourseClick(): void {
-
+  public onStartCourseClick(index: number): void {
+    this.router.navigate(['course-content/' + this.courseStatuses[index].course.id]);
   }
 
 }

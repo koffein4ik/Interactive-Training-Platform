@@ -27,4 +27,8 @@ export class TestService {
     return this.http.post<void>(this.TEST_API + "saveTestQuestionAnswers", testAnswers);
   }
 
+  public getCourseTest(courseId: number): Observable<CourseTestModel> {
+    return this.http.get<CourseTestModel>(this.TEST_API + "getCourseTest/" + courseId);
+  }
+
 }

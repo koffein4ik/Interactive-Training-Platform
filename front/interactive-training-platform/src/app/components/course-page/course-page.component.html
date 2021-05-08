@@ -1,0 +1,9 @@
+<div class="course-page-container">
+  <div class="course-page-content" *ngIf="!isTestStep && course">
+    <app-course-content [course]="course" (onGoToTestClick)="goToTest()"></app-course-content>
+  </div>
+
+  <div class="course-page-test" *ngIf="isTestStep && courseTest">
+    <app-course-test [test]="courseTest"></app-course-test>
+  </div>
+</div>

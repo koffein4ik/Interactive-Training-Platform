@@ -17,6 +17,9 @@ export class RadioButtonContentContainerComponent implements OnInit {
   @Output()
   public onRadioButtonModify: EventEmitter<RadioButtonQuestionModel> = new EventEmitter<RadioButtonQuestionModel>();
 
+  @Output()
+  public onSaveAnswer: EventEmitter<string> = new EventEmitter<string>();
+
   public selectedOption: string;
   public selectedOptionIndex: number = -1;
   public hint: string;
@@ -52,6 +55,10 @@ export class RadioButtonContentContainerComponent implements OnInit {
 
   public onSelectedValueChange(index: number): void {
     this.selectedOptionIndex = index;
+  }
+
+  public onSubmitAnswer(): void {
+    this.onSaveAnswer.emit(this.selectedOptionIndex.toString());
   }
 
 }

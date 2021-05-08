@@ -48,9 +48,17 @@
         <app-image-content-container [imageLink]="content.slideContent"></app-image-content-container>
       </div>
 
-      <!--    <div *ngIf="content.slideContentType === RADIO_BUTTON_SLIDE_TYPE">-->
-      <!--      <app-radio-button-content-container></app-radio-button-content-container>-->
-      <!--    </div>-->
+      <div *ngIf="content.slideContentType === RADIO_BUTTON_SLIDE_TYPE">
+        <app-radio-button-content-container [radioButtonContent]="content.slideContent"></app-radio-button-content-container>
+      </div>
+    </div>
+
+    <div class="course-content-container__test-button" *ngIf="currentLessonNumber === course.courseContent.length - 1">
+      <div class="course-content-container__test-info-text">
+        This is last lesson, now you can go to test
+      </div>
+
+      <button mat-button (click)="goToTest()">Go to test</button>
     </div>
   </div>
 </div>

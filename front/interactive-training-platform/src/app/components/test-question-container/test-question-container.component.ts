@@ -17,6 +17,9 @@ export class TestQuestionContainerComponent implements OnInit {
   @Output()
   public onQuestionModify: EventEmitter<TestTextQuestionModel> = new EventEmitter<TestTextQuestionModel>();
 
+  @Output()
+  public onAnswerSubmit: EventEmitter<string> = new EventEmitter<string>();
+
   public questionAnswer: string;
   public questionText: string;
   public userAnswer: string;
@@ -37,7 +40,7 @@ export class TestQuestionContainerComponent implements OnInit {
   }
 
   public onSaveAnswer(): void {
-
+    this.onAnswerSubmit.emit(this.userAnswer);
   }
 
 }

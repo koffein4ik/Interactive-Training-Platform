@@ -3,11 +3,11 @@
   <mat-form-field appearance="fill">
     <mat-label>Choose an option</mat-label>
     <mat-select [(value)]="selectedOption" (valueChange)="onSelectedOptionChange()">
-      <mat-option [value]="TEXT_SLIDE_TYPE">{{TEXT_SLIDE_TYPE}}</mat-option>
-      <mat-option [value]="AUDIO_SLIDE_TYPE">{{AUDIO_SLIDE_TYPE}}</mat-option>
-      <mat-option [value]="VIDEO_SLIDE_TYPE">{{VIDEO_SLIDE_TYPE}}</mat-option>
-      <mat-option [value]="IMAGE_SLIDE_TYPE">{{IMAGE_SLIDE_TYPE}}</mat-option>
-      <mat-option [value]="RADIO_BUTTON_SLIDE_TYPE">{{RADIO_BUTTON_SLIDE_TYPE}}</mat-option>
+      <mat-option [value]="TEXT_SLIDE_TYPE">Text</mat-option>
+      <mat-option [value]="AUDIO_SLIDE_TYPE">Audio</mat-option>
+      <mat-option [value]="VIDEO_SLIDE_TYPE">Video</mat-option>
+      <mat-option [value]="IMAGE_SLIDE_TYPE">Image</mat-option>
+      <mat-option [value]="RADIO_BUTTON_SLIDE_TYPE">Radio button</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -40,7 +40,8 @@
   </div>
 
   <div class="add-course-content-popup-text" *ngIf="selectedOption === RADIO_BUTTON_SLIDE_TYPE">
-    Radio button
+    <app-radio-button-content-container [isAddNewCourse]="true" [radioButtonContent]="radioButtonModel">
+    </app-radio-button-content-container>
   </div>
 </div>
 <div mat-dialog-actions>

@@ -1,9 +1,9 @@
 <div class="my-courses-container">
-  <div class="my-courses-course-status-container" *ngFor="let courseStatus of courseStatuses">
+  <div class="my-courses-course-status-container" *ngFor="let courseStatus of courseStatuses; let i = index">
     {{courseStatus.course.name}}
     {{courseStatus.status.statusName}}
     <div class="my-courses-course-status-start-button" *ngIf="courseStatus.status.statusName === 'Available'">
-      <button mat-button (click)="onStartCourseClick()">Start</button>
+      <button mat-button (click)="onStartCourseClick(i)">Start</button>
     </div>
   </div>
 </div>

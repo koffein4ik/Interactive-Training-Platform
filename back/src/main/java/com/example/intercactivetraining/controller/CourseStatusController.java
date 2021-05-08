@@ -48,8 +48,14 @@ public class CourseStatusController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("getAllStatuses")
+    @GetMapping("getAllCourseStatuses")
     public Iterable<CourseStatusEntity> getAllCourseStatuses() {
         return this.courseStatusService.getAllCourseStatuses();
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("updateUserCourseStatus")
+    public UserCourseStatusEntity updateCourseStatus(@RequestBody UserCourseStatusEntity userCourseStatusEntity) {
+        return courseStatusService.updateCourseStatus(userCourseStatusEntity);
     }
 }

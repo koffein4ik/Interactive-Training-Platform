@@ -25,7 +25,19 @@
     </div>
 
     <div class="course-full-description-reviews-container">
+      <div class="course-full-description-reviews-content" *ngFor="let review of reviews">
+        {{review.author.login}}
+        {{review.reviewContent}}
+      </div>
 
+      <div class="course-full-description-reviews-add">
+        <mat-form-field>
+          <mat-label>Enter review text</mat-label>
+          <input matInput [(ngModel)]="newReviewText">
+        </mat-form-field>
+
+        <button mat-button (click)="addReview()">Add review</button>
+      </div>
     </div>
   </div>
 </div>

@@ -7,4 +7,6 @@ public interface TestService {
     int saveTest(TestEntity testEntity);
 
     void saveTestQuestionAnswers(TestQuestionAnswerEntity[] testQuestionAnswers);
+
+    TestEntity getCourseTest(int courseId);
 }

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CourseTestModel} from "../../models/course-test.model";
 import {SlideContentConstantsModel} from "../../models/slide-content-constants.model";
 import {TestQuestionTypesConstantsModel} from "../../models/test-question-types.constants.model";
+import {UserTestQuestionAnswersModel} from "../../models/user-test-question-answers.model";
 
 @Component({
   selector: 'app-course-test',
@@ -17,7 +18,7 @@ export class CourseTestComponent implements OnInit {
   public test: CourseTestModel;
 
   @Input()
-  public currentTestQuestionNumber: number;
+  public currentTestQuestionNumber: number = 0;
 
   @Output()
   public onAddNewTestLessonClick: EventEmitter<void> = new EventEmitter<void>();
@@ -31,8 +32,12 @@ export class CourseTestComponent implements OnInit {
   @Output()
   public onAddTestQuestion: EventEmitter<void> = new EventEmitter<void>();
 
+  @Output()
+  public onFinishTest: EventEmitter<any> = new EventEmitter<any>();
+
   public editingPercentsMode: boolean;
   public percents: number;
+  public userTestQuestionAnswers: UserTestQuestionAnswersModel;
 
   public readonly TEXT_SLIDE_TYPE: string = SlideContentConstantsModel.TEXT_SLIDE_TYPE;
   public readonly VIDEO_SLIDE_TYPE: string = SlideContentConstantsModel.VIDEO_SLIDE_TYPE;
@@ -45,6 +50,10 @@ export class CourseTestComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.userTestQuestionAnswers = {
+      testId: this.test.id,
+      answers: {}
+    }
   }
 
   public togglePercentsEditingMode(): void {
@@ -52,12 +61,22 @@ export class CourseTestComponent implements OnInit {
   }
 
   public onTestLessonChange(newQuestionNumber: number): void {
+    this.currentTestQuestionNumber = newQuestionNumber;
     this.onTestLessonNumberChange.emit(newQuestionNumber)
   }
 
   public saveUpdatedPercents(): void {
     this.test.percentsToPass = this.percents;
     this.togglePercentsEditingMode();
+  }
+
+  public onSaveAnswer(questionNumber: number, answer: string): void {
+    this.userTestQuestionAnswers.answers[questionNumber] = answer;
+  }
+
+  public finishTest(): void {
+    console.log(this.userTestQuestionAnswers);
+    this.onFinishTest.emit();
   }
 
 }

@@ -43,6 +43,10 @@
     {{radioButtonContent.hint}}
   </div>
 
+  <div class="radio-button-save-answer" *ngIf="!isAddNewCourse">
+    <button mat-button (click)="onSubmitAnswer()" [disabled]="!selectedOption">Submit</button>
+  </div>
+
   <div class="radio-button-content-hint" *ngIf="selectedOptionIndex !== -1 && radioButtonContent.options && isAddNewCourse">
     <button mat-button (click)="markOptionAsCorrect()">Mark this option as correct</button>
   </div>

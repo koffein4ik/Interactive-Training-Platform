@@ -53,4 +53,9 @@ public class CourseStatusServiceImpl implements CourseStatusService {
     public Iterable<CourseStatusEntity> getAllCourseStatuses() {
         return courseStatusRepository.findAll();
     }
+
+    @Override
+    public UserCourseStatusEntity updateCourseStatus(UserCourseStatusEntity userCourseStatusEntity) {
+        return userCourseStatusRepository.save(userCourseStatusEntity);
+    }
 }

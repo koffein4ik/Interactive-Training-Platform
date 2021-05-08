@@ -31,4 +31,10 @@ public class TestController {
     public void saveTestQuestionAnswers(@RequestBody TestQuestionAnswerEntity[] testQuestionAnswers) {
         testService.saveTestQuestionAnswers(testQuestionAnswers);
     }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/getCourseTest/{id}")
+    public TestEntity getCourseTest(@PathVariable(name = "id") String courseId) {
+        return testService.getCourseTest(Integer.parseInt(courseId));
+    }
 }
