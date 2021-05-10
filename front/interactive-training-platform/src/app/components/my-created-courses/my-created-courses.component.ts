@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {UserCourseStatusService} from "../../services/user-course-status.service";
 import {UserCourseStatusModel} from "../../models/user-course-status.model";
 import {CourseStatusModel} from "../../models/course-status.model";
+import {filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-my-created-courses',
@@ -12,6 +13,7 @@ export class MyCreatedCoursesComponent implements OnInit {
 
   public userCourseStatuses: UserCourseStatusModel[];
   public courseStatuses: CourseStatusModel[];
+  public displayedColumns: string[] = ['courseName', 'userLogin', 'userFirstName', 'userLastName', 'userEmail', 'currentCourseStatus', 'updatedStatus'];
 
   constructor(private userCourseStatusService: UserCourseStatusService) {
   }
@@ -20,12 +22,18 @@ export class MyCreatedCoursesComponent implements OnInit {
     this.userCourseStatusService.getUserCourseStatusesByAuthor()
       .subscribe((statuses: UserCourseStatusModel[]) => this.userCourseStatuses = statuses);
     this.userCourseStatusService.getAllCourseStatuses()
+      .pipe(
+        map((statuses: CourseStatusModel[]) => {
+          return statuses.filter((status: CourseStatusModel) => status.statusName === 'Rejected' || status.statusName === 'Available');
+        })
+      )
       .subscribe((statuses: CourseStatusModel[]) => this.courseStatuses = statuses);
   }
 
-  public onUserCourseStatusChange(index: number, selectedStatus: string): void {
-    this.userCourseStatuses[index].status = this.courseStatuses.find((status: CourseStatusModel) => status.statusName === selectedStatus);
-    this.userCourseStatusService.updateUserCourseStatus(this.userCourseStatuses[index]).subscribe();
+  public onUserCourseStatusChange(statusId: number, selectedStatus: string): void {
+    const userCourseStatus = this.userCourseStatuses.find((status: UserCourseStatusModel) => status.id === statusId);
+    userCourseStatus.status = this.courseStatuses.find((status: CourseStatusModel) => status.statusName === selectedStatus);
+    this.userCourseStatusService.updateUserCourseStatus(userCourseStatus).subscribe();
   }
 
 }

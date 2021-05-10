@@ -4,7 +4,9 @@
       <mat-label>Enter enter question text</mat-label>
       <input matInput #addQuestionInput [(ngModel)]="questionText">
     </mat-form-field>
-    <button mat-button [disabled]="!addQuestionInput.value" (click)="onAddQuestion()">Save question</button>
+    <button mat-raised-button color="primary" [disabled]="!addQuestionInput.value" (click)="onAddQuestion()">Save
+      question
+    </button>
   </div>
 
   <div class="test-question-answer-add" *ngIf="isAddNewCourse">
@@ -12,7 +14,8 @@
       <mat-label>Enter question answer</mat-label>
       <input matInput #addAnswerInput [(ngModel)]="questionAnswer">
     </mat-form-field>
-    <button mat-button [disabled]="!addAnswerInput.value" (click)="onAddAnswer()">Save answer</button>
+    <button mat-raised-button color="primary" [disabled]="!addAnswerInput.value" (click)="onAddAnswer()">Save answer
+    </button>
   </div>
 
   <div class="test-question-content" *ngIf="testTextQuestion.question">
@@ -35,7 +38,11 @@
         <mat-label>Enter your answer here</mat-label>
         <input matInput #userAnswerInput [(ngModel)]="userAnswer">
       </mat-form-field>
-      <button mat-button [disabled]="!userAnswerInput.value" (click)="onSaveAnswer()">Save answer</button>
+      <div class="test-question-content-answer-field-save">
+        <button mat-raised-button color="primary" [disabled]="!userAnswerInput.value || userAnswerInput.value === submittedAnswer" (click)="onSaveAnswer()">
+          Save answer
+        </button>
+      </div>
     </div>
   </div>
 </div>

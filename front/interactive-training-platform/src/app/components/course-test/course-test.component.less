@@ -15,6 +15,19 @@
   &-button-add {
     margin-left: 0.5rem;
   }
+
+  &-lessons {
+    margin-bottom: 0.5rem;
+  }
+
+  &-percent {
+    &-text {
+      background-color: #F06543;
+      color: white;
+      padding: 1rem;
+      border-radius: 0.4rem;
+    }
+  }
 }
 
 .course-test-content-container {
@@ -39,5 +52,26 @@
   &__nav-buttons-container {
     display: flex;
     justify-content: center;
+    margin: 1rem;
+
+    & button {
+      width: 10rem;
+      margin-right: 1rem;
+      margin-left: 1rem;
+    }
+  }
+}
+
+.course-test {
+  &-finish-button {
+    position: relative;
+    height: 2rem;
+    margin-bottom: 1rem;
+
+    & button {
+      position: absolute;
+      width: 10rem;
+      right: 2rem;
+    }
   }
 }

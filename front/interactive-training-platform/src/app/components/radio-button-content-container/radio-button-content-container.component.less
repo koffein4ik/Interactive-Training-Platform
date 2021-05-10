@@ -1,9 +1,17 @@
-.example-radio-group {
+.radio-button-content-radio-group {
   display: flex;
   flex-direction: column;
   margin: 15px 0;
+
+  & mat-radio-button {
+    margin-bottom: 0.5rem;
+  }
 }
 
-.example-radio-button {
-  margin: 5px;
+.radio-button {
+  &-answer-submit {
+    & button {
+      width: 10rem;
+    }
+  }
 }

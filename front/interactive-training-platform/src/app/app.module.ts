@@ -44,6 +44,7 @@ import {MyCoursesComponent} from './components/my-courses/my-courses.component';
 import {MyCreatedCoursesComponent} from './components/my-created-courses/my-created-courses.component';
 import {CourseReviewsComponent} from './components/course-reviews/course-reviews.component';
 import {CoursePageComponent} from './components/course-page/course-page.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -77,23 +78,24 @@ import {CoursePageComponent} from './components/course-page/course-page.componen
     CourseReviewsComponent,
     CoursePageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatNativeDateModule,
-    MatButtonModule,
-    MatRadioModule,
-    FormsModule,
-    MatIconModule,
-    MatDialogModule,
-    MatSelectModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatNativeDateModule,
+        MatButtonModule,
+        MatRadioModule,
+        FormsModule,
+        MatIconModule,
+        MatDialogModule,
+        MatSelectModule,
+        HttpClientModule,
+        MatTableModule
+    ],
   providers: [APIInterceptor, {
     provide: HTTP_INTERCEPTORS,
     useClass: APIInterceptor,

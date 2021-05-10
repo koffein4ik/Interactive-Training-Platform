@@ -1,10 +1,15 @@
 .header {
+  &-container {
+    position: relative;
+  }
+
   &-content {
     background-color: #333;
     overflow: hidden;
+    height: 5vh;
   }
 
-  &-content a {
+  &-content a, &-logout {
     float: left;
     color: #f2f2f2;
     text-align: center;
@@ -14,7 +19,13 @@
     height: 2vh;
   }
 
-  &-content a:hover {
+  &-logout {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+
+  &-content a:hover, &-logout:hover {
     background-color: #3f51b5;
   }
 }

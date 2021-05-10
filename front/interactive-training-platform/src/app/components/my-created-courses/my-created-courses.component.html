@@ -1,19 +1,62 @@
-<div class="my-created-courses-container">
-  <div class="my-created-courses-user-status-container">
-    <div class="my-created-courses-user-status-content" *ngFor="let status of userCourseStatuses; let i = index">
-      {{status.course.name}}
-      {{status.status.statusName}}
-      {{status.user.firstName}}
-      {{status.user.lastName}}
+<div class="table-container mat-elevation-z8">
+  <table mat-table [dataSource]="userCourseStatuses" class="mat-elevation-z8">
 
-      <mat-form-field appearance="fill">
-        <mat-label>Choose new status</mat-label>
-        <mat-select #selectedStatus>
-          <mat-option *ngFor="let status of courseStatuses" [value]="status.statusName">{{status.statusName}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <ng-container matColumnDef="courseName">
+      <th mat-header-cell *matHeaderCellDef>Course name</th>
+      <td mat-cell *matCellDef="let status">{{status.course.name}}</td>
+    </ng-container>
 
-      <button mat-button (click)="onUserCourseStatusChange(i, selectedStatus.value)">Save</button>
-    </div>
-  </div>
+    <ng-container matColumnDef="userLogin">
+      <th mat-header-cell *matHeaderCellDef>User login</th>
+      <td mat-cell *matCellDef="let status">{{status.user.login}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="userFirstName">
+      <th mat-header-cell *matHeaderCellDef>User name</th>
+      <td mat-cell *matCellDef="let status">{{status.user.firstName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="userLastName">
+      <th mat-header-cell *matHeaderCellDef>User surname</th>
+      <td mat-cell *matCellDef="let status">{{status.user.lastName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="userEmail">
+      <th mat-header-cell *matHeaderCellDef>User email</th>
+      <td mat-cell *matCellDef="let status">{{status.user.email}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="currentCourseStatus">
+      <th mat-header-cell *matHeaderCellDef>Course status</th>
+      <td mat-cell *matCellDef="let status">{{status.status.statusName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="updatedStatus">
+      <th mat-header-cell *matHeaderCellDef>Updated status</th>
+      <td mat-cell *matCellDef="let status">
+        <div class="update-status-content" *ngIf="courseStatuses">
+          <mat-form-field appearance="fill">
+            <mat-label>Choose new status</mat-label>
+            <mat-select #selectedStatus [value]="courseStatuses[0].statusName"
+                        [disabled]="status.status.statusName === 'Passed'">
+              <mat-option *ngFor="let status of courseStatuses"
+                          [value]="status.statusName">{{status.statusName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="update-status-button">
+            <button mat-raised-button color="primary"
+                    [disabled]="status.status.statusName === selectedStatus.value"
+                    (click)="onUserCourseStatusChange(status.id, selectedStatus.value)">
+              Update
+            </button>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 </div>

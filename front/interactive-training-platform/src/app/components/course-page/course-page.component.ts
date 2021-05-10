@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseModel} from "../../models/course.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CourseService} from "../../services/course.service";
 import {map} from "rxjs/operators";
 import {TestService} from "../../services/test.service";
 import {CourseTestModel} from "../../models/course-test.model";
+import {UserTestQuestionAnswersModel} from "../../models/user-test-question-answers.model";
 
 @Component({
   selector: 'app-course-page',
@@ -15,11 +16,13 @@ export class CoursePageComponent implements OnInit {
 
   public course: CourseModel;
   public courseTest: CourseTestModel;
-  public isTestStep: boolean;
+  public currentStepNumber: number = 1;
+  public testCheckResult: string = 'Failed';
 
   constructor(private activatedRoute: ActivatedRoute,
               private courseService: CourseService,
-              private testService: TestService) {
+              private testService: TestService,
+              private router: Router) {
   }
 
   public ngOnInit(): void {
@@ -47,7 +50,23 @@ export class CoursePageComponent implements OnInit {
   }
 
   public goToTest(): void {
-    this.isTestStep = true;
+    this.currentStepNumber = 2;
+  }
+
+  public onFinishTest(userTestQuestionAnswersModel: UserTestQuestionAnswersModel): void {
+    this.testService.checkAnswers(userTestQuestionAnswersModel)
+      .subscribe((result: string) => {
+        this.testCheckResult = result;
+        this.currentStepNumber = 3;
+      });
+  }
+
+  public onOtherCoursesClick(): void {
+    this.router.navigate(['/']);
+  }
+
+  public onTryAgainClick(): void {
+    window.location.reload();
   }
 
 }

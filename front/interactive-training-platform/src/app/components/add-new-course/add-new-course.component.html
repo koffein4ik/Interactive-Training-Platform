@@ -30,7 +30,7 @@
     </div>
 
     <div class="add-new-course-step-save">
-      <button mat-button color="primary" [disabled]="courseDescriptionFormGroup.invalid" (click)="onClickSaveFirstStep()">Save</button>
+      <button mat-raised-button color="primary" [disabled]="courseDescriptionFormGroup.invalid" (click)="onClickSaveFirstStep()">Save</button>
     </div>
   </div>
 
@@ -43,7 +43,7 @@
                         (onAddNewLessonClick)="openLessonDialog()"></app-course-content>
 
     <div class="add-new-course-step-save">
-      <button mat-button color="primary" (click)="onClickSaveSecondStep()">Save</button>
+      <button mat-raised-button color="primary" (click)="onClickSaveSecondStep()">Save</button>
     </div>
   </div>
 
@@ -58,7 +58,7 @@
     </app-course-test>
 
     <div class="add-new-course-step-save">
-      <button mat-button color="primary" (click)="onClickSaveThirdStep()">Save</button>
+      <button mat-raised-button color="primary" (click)="onClickSaveThirdStep()">Save</button>
     </div>
   </div>
 </div>

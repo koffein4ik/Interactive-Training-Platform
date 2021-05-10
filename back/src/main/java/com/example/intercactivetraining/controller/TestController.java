@@ -2,6 +2,7 @@ package com.example.intercactivetraining.controller;
 
 import com.example.intercactivetraining.model.TestEntity;
 import com.example.intercactivetraining.model.TestQuestionAnswerEntity;
+import com.example.intercactivetraining.model.UserTestQuestionAnswers;
 import com.example.intercactivetraining.service.TestService;
 import com.example.intercactivetraining.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +31,13 @@ public class TestController {
     @PostMapping("/saveTestQuestionAnswers")
     public void saveTestQuestionAnswers(@RequestBody TestQuestionAnswerEntity[] testQuestionAnswers) {
         testService.saveTestQuestionAnswers(testQuestionAnswers);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/checkAnswers")
+    public String checkAnswers(@RequestBody UserTestQuestionAnswers userTestQuestionAnswers) {
+        int userId = userService.getUserId();
+        return testService.checkAnswers(userTestQuestionAnswers, userId);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")

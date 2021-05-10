@@ -1,9 +1,35 @@
 <div class="course-page-container">
-  <div class="course-page-content" *ngIf="!isTestStep && course">
+  <div class="course-page-content" *ngIf="course && currentStepNumber === 1">
     <app-course-content [course]="course" (onGoToTestClick)="goToTest()"></app-course-content>
   </div>
 
-  <div class="course-page-test" *ngIf="isTestStep && courseTest">
-    <app-course-test [test]="courseTest"></app-course-test>
+  <div class="course-page-test" *ngIf="courseTest && currentStepNumber === 2">
+    <app-course-test [test]="courseTest" (onFinishTest)="onFinishTest($event)"></app-course-test>
+  </div>
+
+  <div class="course-page-result" *ngIf="currentStepNumber === 3">
+    <div class="course-page-result-success" *ngIf="testCheckResult === 'Success'">
+      Congratulations! You've successfully passed this test!
+
+      <div class="course-page-result-success-action">
+        <button mat-raised-button color="primary" (click)="onOtherCoursesClick()">Check other courses</button>
+      </div>
+    </div>
+
+    <div class="course-page-result-failed" *ngIf="testCheckResult === 'Failed'">
+      Unfortunately you don't have enough correct answers. Please try again.
+
+      <div class="course-page-result-failed-action">
+        <button mat-raised-button color="primary" (click)="onTryAgainClick()">Try again</button>
+      </div>
+    </div>
+
+    <div class="course-page-result-error" *ngIf="testCheckResult === 'Error'">
+      Some error occurred while processing your test results. Please try again later.
+
+      <div class="course-page-result-error-action">
+        <button mat-raised-button color="primary" (click)="onTryAgainClick()">Try again</button>
+      </div>
+    </div>
   </div>
 </div>

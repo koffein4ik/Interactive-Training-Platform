@@ -55,6 +55,11 @@ public class CourseStatusServiceImpl implements CourseStatusService {
     }
 
     @Override
+    public CourseStatusEntity getPassesCourseStatus() {
+        return courseStatusRepository.findByStatusName("Passed").orElse(null);
+    }
+
+    @Override
     public UserCourseStatusEntity updateCourseStatus(UserCourseStatusEntity userCourseStatusEntity) {
         return userCourseStatusRepository.save(userCourseStatusEntity);
     }

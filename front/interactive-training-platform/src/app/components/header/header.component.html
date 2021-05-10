@@ -1,10 +1,13 @@
 <div class="header-container">
  <div class="header-content">
    <a routerLink="/">ITP</a>
-   <a routerLink="/registration">Registration</a>
-   <a routerLink="/login">Login</a>
-   <a routerLink="/add-new-course">Create course</a>
-   <a routerLink="/my-courses">My courses</a>
-   <a routerLink="/my-created-courses">My created courses</a>
+   <a routerLink="/registration" *ngIf="!isAuthorized">Registration</a>
+   <a routerLink="/login" *ngIf="!isAuthorized">Login</a>
+   <a routerLink="/add-new-course" *ngIf="isAuthorized">Create course</a>
+   <a routerLink="/my-courses" *ngIf="isAuthorized">My courses</a>
+   <a routerLink="/my-created-courses" *ngIf="isAuthorized">My created courses</a>
+   <div class="header-logout" *ngIf="isAuthorized" (click)="onLogout()">
+     Logout
+   </div>
  </div>
 </div>

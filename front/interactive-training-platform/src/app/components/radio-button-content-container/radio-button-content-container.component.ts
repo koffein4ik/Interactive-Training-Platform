@@ -14,6 +14,9 @@ export class RadioButtonContentContainerComponent implements OnInit {
   @Input()
   public radioButtonContent: RadioButtonQuestionModel;
 
+  @Input()
+  public userSubmittedAnswer: string;
+
   @Output()
   public onRadioButtonModify: EventEmitter<RadioButtonQuestionModel> = new EventEmitter<RadioButtonQuestionModel>();
 
@@ -21,6 +24,7 @@ export class RadioButtonContentContainerComponent implements OnInit {
   public onSaveAnswer: EventEmitter<string> = new EventEmitter<string>();
 
   public selectedOption: string;
+  public previousSubmittedValue: string;
   public selectedOptionIndex: number = -1;
   public hint: string;
   public newOption: string;
@@ -29,7 +33,6 @@ export class RadioButtonContentContainerComponent implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
-
   }
 
   public onAddOptionClick(): void {
@@ -59,6 +62,7 @@ export class RadioButtonContentContainerComponent implements OnInit {
 
   public onSubmitAnswer(): void {
     this.onSaveAnswer.emit(this.selectedOptionIndex.toString());
+    this.previousSubmittedValue = this.selectedOption;
   }
 
 }

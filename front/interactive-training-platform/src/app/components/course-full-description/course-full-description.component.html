@@ -1,42 +1,55 @@
 <div class="course-full-description-container">
   <div class="course-full-description-content" *ngIf="course">
-    <div class="course-full-description-name">
-      {{course.name}}
-    </div>
+    <div class="course-full-description-content-container">
+      <div class="course-full-description__left-block">
+        <div class="course-full-description__left-block-name">
+          {{course.name}}
+        </div>
 
-    <div class="course-full-description-image">
-      <img [src]="course.imagePath">
-    </div>
+        <div class="course-full-description__left-block-text">
+          {{course.fullDescription}}
+        </div>
 
-    <div class="course-full-description-text">
-      {{course.fullDescription}}
-    </div>
+        <div class="course-full-description__left-block-price">
+          Course price is: {{course.price}}
+        </div>
 
-    <div class="course-full-description-price">
-      {{course.price}}
+        <div class="course-full-description__left-block-user-status" *ngIf="userCourseStatus">
+          Your status for this course is: {{userCourseStatus.status.statusName}}
+        </div>
+      </div>
+
+      <div class="course-full-description-image">
+        <img [src]="course.imagePath">
+      </div>
     </div>
 
     <div class="course-full-description-enroll-button" *ngIf="!userCourseStatus">
-      <button mat-button (click)="onCourseEnrollClick()">Enroll</button>
-    </div>
-
-    <div class="course-full-description-user-status" *ngIf="userCourseStatus">
-      {{userCourseStatus.status.statusName}}
+      <button mat-raised-button color="primary" (click)="onCourseEnrollClick()">Enroll</button>
     </div>
 
     <div class="course-full-description-reviews-container">
-      <div class="course-full-description-reviews-content" *ngFor="let review of reviews">
-        {{review.author.login}}
-        {{review.reviewContent}}
-      </div>
 
-      <div class="course-full-description-reviews-add">
+      <div class="course-full-description-reviews-add"
+           *ngIf="userCourseStatus && (userCourseStatus.status.statusName === 'Available' || userCourseStatus.status.statusName === 'Passed')">
         <mat-form-field>
           <mat-label>Enter review text</mat-label>
-          <input matInput [(ngModel)]="newReviewText">
+          <textarea matInput #newReviewTextArea [(ngModel)]="newReviewText"></textarea>
         </mat-form-field>
 
-        <button mat-button (click)="addReview()">Add review</button>
+        <div class="course-full-description-reviews-add-button">
+          <button mat-raised-button color="primary" [disabled]="!newReviewTextArea.value" (click)="addReview()">Add review</button>
+        </div>
+      </div>
+
+      <div class="course-full-description-reviews-content" *ngFor="let review of reviews">
+        <div class="course-full-description-reviews-login">
+          {{review.author.login}}
+        </div>
+
+        <div class="course-full-description-reviews-text">
+          {{review.reviewContent}}
+        </div>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CourseTestModel} from "../models/course-test.model";
 import {TestQuestionAnswerModel} from "../models/test-question-answer.model";
+import {UserTestQuestionAnswersModel} from "../models/user-test-question-answers.model";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,14 @@ export class TestService {
 
   public getCourseTest(courseId: number): Observable<CourseTestModel> {
     return this.http.get<CourseTestModel>(this.TEST_API + "getCourseTest/" + courseId);
+  }
+
+  public checkAnswers(userTestQuestionAnswers: UserTestQuestionAnswersModel): Observable<string> {
+    const options: Object = {
+      headers: new HttpHeaders(),
+      responseType: 'text'
+    }
+    return this.http.post<string>(this.TEST_API + "checkAnswers", userTestQuestionAnswers, options);
   }
 
 }

@@ -6,19 +6,24 @@
       </button>
     </div>
 
-    <div *ngFor="let content of test.testContent; let i = index">
-      <div class="course-test-navbar-button">
-        <button mat-button color="primary" [disabled]="i === currentTestQuestionNumber"
-                (click)="onTestLessonChange(i)">{{i + 1}}</button>
+    <div class="course-test-navbar-lessons">
+      <div *ngFor="let content of test.testContent; let i = index">
+        <div class="course-test-navbar-button">
+          <button mat-button color="primary" [disabled]="i === currentTestQuestionNumber"
+                  (click)="onTestLessonChange(i)">{{i + 1}}</button>
+        </div>
       </div>
     </div>
 
     <div class="course-test-navbar-percent-container">
       <div class="course-test-navbar-percent">
-        Required percent of correct answers to pass test is {{test.percentsToPass}}
+        <div class="course-test-navbar-percent-text">
+          Required percent of correct answers to pass test is more than {{test.percentsToPass}}
+        </div>
 
         <div class="course-test-navbar-percent-change" *ngIf="isAddNewTest">
-          <button mat-button color="primary" (click)="togglePercentsEditingMode()" *ngIf="!editingPercentsMode">Change
+          <button mat-raised-button color="primary" (click)="togglePercentsEditingMode()" *ngIf="!editingPercentsMode">
+            Change
           </button>
 
           <div class="course-test-navbar-percent-edit" *ngIf="editingPercentsMode">
@@ -27,7 +32,7 @@
               <input matInput [(ngModel)]="percents">
             </mat-form-field>
 
-            <button mat-button color="primary" (click)="saveUpdatedPercents()">Save</button>
+            <button mat-raised-button color="primary" (click)="saveUpdatedPercents()">Save</button>
           </div>
         </div>
       </div>
@@ -40,14 +45,14 @@
     </div>
 
     <div class="course-test-navbar-button-add" *ngIf="isAddNewTest">
-      <button mat-button color="primary" (click)="onAddTestContentClick.emit()">Add content</button>
+      <button mat-raised-button color="primary" (click)="onAddTestContentClick.emit()">Add content</button>
     </div>
 
     <div class="course-test-content-container__nav-buttons-container">
-      <button mat-button color="primary" [disabled]="currentTestQuestionNumber === 0"
+      <button mat-raised-button color="primary" [disabled]="currentTestQuestionNumber === 0"
               (click)="onTestLessonChange(currentTestQuestionNumber - 1)">Previous question
       </button>
-      <button mat-button color="primary" [disabled]="currentTestQuestionNumber === test.testContent.length - 1"
+      <button mat-raised-button color="primary" [disabled]="currentTestQuestionNumber === test.testContent.length - 1"
               (click)="onTestLessonChange(currentTestQuestionNumber + 1)">Next question
       </button>
     </div>
@@ -71,7 +76,7 @@
     </div>
 
     <div class="course-test-container__add-question-button" *ngIf="isAddNewTest">
-      <button mat-button color="primary" (click)="onAddTestQuestion.emit()">Add question</button>
+      <button mat-raised-button color="primary" (click)="onAddTestQuestion.emit()">Add question</button>
     </div>
 
     <div class="course-test-question-container"
@@ -79,19 +84,23 @@
       <div class="course-test-question-radio-button-container"
            *ngIf="questionContent.testQuestionType === RADIO_BUTTON_QUESTION_TYPE">
         <app-radio-button-content-container
-          [radioButtonContent]="questionContent.testQuestionContent" (onSaveAnswer)="onSaveAnswer(currentTestQuestionNumber, $event)">
+          [userSubmittedAnswer]="userTestQuestionAnswers.answers[currentTestQuestionNumber]"
+          [radioButtonContent]="questionContent.testQuestionContent"
+          (onSaveAnswer)="onSaveAnswer(currentTestQuestionNumber, $event)">
         </app-radio-button-content-container>
       </div>
 
       <div class="course-test-question-text-container" *ngIf="questionContent.testQuestionType === TEXT_QUESTION_TYPE">
         <app-test-question-container
-          [testTextQuestion]="questionContent.testQuestionContent" (onAnswerSubmit)="onSaveAnswer(currentTestQuestionNumber, $event)">
+          [userSubmittedAnswer]="userTestQuestionAnswers.answers[currentTestQuestionNumber]"
+          [testTextQuestion]="questionContent.testQuestionContent"
+          (onAnswerSubmit)="onSaveAnswer(currentTestQuestionNumber, $event)">
         </app-test-question-container>
       </div>
     </div>
 
     <div class="course-test-finish-button" *ngIf="currentTestQuestionNumber === test.testContent.length - 1">
-      <button mat-button (click)="finishTest()">Finish test</button>
+      <button mat-raised-button color="primary" [disabled]="isFinishButtonDisabled()" (click)="finishTest()">Finish test</button>
     </div>
 
   </div>

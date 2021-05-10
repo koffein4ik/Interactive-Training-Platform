@@ -1,6 +1,6 @@
 <div class="login">
   <div class="login_title">
-    <h1>login</h1>
+    <h1>Login</h1>
   </div>
   <form [formGroup]="formGroup" class="login_form">
     <mat-form-field appearance="legacy">
@@ -19,7 +19,11 @@
     Please fill all required fields
   </div>
 
+  <div class="login-error" *ngIf="incorrectCreds">
+    Your login or password is incorrect
+  </div>
+
   <div class="login-submit">
-    <button mat-button color="primary" [disabled]="formGroup.invalid" (click)="onLoginButtonClick()">Log in</button>
+    <button mat-raised-button color="primary" [disabled]="formGroup.invalid" (click)="onLoginButtonClick()">Log in</button>
   </div>
 </div>

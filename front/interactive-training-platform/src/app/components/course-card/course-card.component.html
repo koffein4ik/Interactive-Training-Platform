@@ -1,4 +1,4 @@
-<div class="course-card-container" *ngIf="course">
+<div class="course-card-container" *ngIf="course" (click)="openCourse()">
   <div class="course-card-name">
     {{course.name}}
   </div>
@@ -9,9 +9,5 @@
 
   <div class="course-card-short-description">
     {{course.shortDescription}}
-  </div>
-
-  <div class="course-card-open-button">
-    <button mat-button (click)="openCourse()">View course</button>
   </div>
 </div>

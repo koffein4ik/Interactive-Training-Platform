@@ -33,7 +33,7 @@ export class CourseTestComponent implements OnInit {
   public onAddTestQuestion: EventEmitter<void> = new EventEmitter<void>();
 
   @Output()
-  public onFinishTest: EventEmitter<any> = new EventEmitter<any>();
+  public onFinishTest: EventEmitter<UserTestQuestionAnswersModel> = new EventEmitter<UserTestQuestionAnswersModel>();
 
   public editingPercentsMode: boolean;
   public percents: number;
@@ -76,7 +76,11 @@ export class CourseTestComponent implements OnInit {
 
   public finishTest(): void {
     console.log(this.userTestQuestionAnswers);
-    this.onFinishTest.emit();
+    this.onFinishTest.emit(this.userTestQuestionAnswers);
+  }
+
+  public isFinishButtonDisabled(): boolean {
+    return this.test.testContent.length !== Object.keys(this.userTestQuestionAnswers.answers).length;
   }
 
 }

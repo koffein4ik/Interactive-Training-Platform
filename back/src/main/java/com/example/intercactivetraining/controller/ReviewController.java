@@ -30,7 +30,6 @@ public class ReviewController {
         reviewService.addCourseReview(reviewEntity);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/getCourseReviews/{id}")
     public Iterable<ReviewEntity> getCourseReviews(@PathVariable(name = "id") String courseId) {
         return reviewService.getCourseReviews(Integer.parseInt(courseId));

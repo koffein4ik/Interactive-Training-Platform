@@ -14,6 +14,9 @@ export class TestQuestionContainerComponent implements OnInit {
   @Input()
   public isAddNewCourse: boolean;
 
+  @Input()
+  public userSubmittedAnswer: string;
+
   @Output()
   public onQuestionModify: EventEmitter<TestTextQuestionModel> = new EventEmitter<TestTextQuestionModel>();
 
@@ -23,6 +26,7 @@ export class TestQuestionContainerComponent implements OnInit {
   public questionAnswer: string;
   public questionText: string;
   public userAnswer: string;
+  public submittedAnswer: string;
 
   constructor() { }
 
@@ -41,6 +45,7 @@ export class TestQuestionContainerComponent implements OnInit {
 
   public onSaveAnswer(): void {
     this.onAnswerSubmit.emit(this.userAnswer);
+    this.submittedAnswer = this.userAnswer;
   }
 
 }

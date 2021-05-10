@@ -17,6 +17,10 @@ export class AllCoursesComponent implements OnInit {
     this.courseService.getAllCourses().subscribe((courses: CourseModel[]) => {
       this.courses = courses;
       console.log(this.courses);
+      for (let i = 0; i < 20; i++) {
+        this.courses.push(this.courses[0]);
+        // this.courses[i].imagePath = "https://upload.wikimedia.org/wikipedia/commons/d/d5/Japan_small_icon.png";
+      }
     });
   }
 

@@ -59,6 +59,7 @@ export class CourseFullDescriptionComponent implements OnInit {
         switchMap(() => this.reviewService.getCourseReviews(this.course.id))
       )
       .subscribe((reviews: CourseReviewModel[]) => this.reviews = reviews);
+    this.newReviewText = "";
   }
 
 }

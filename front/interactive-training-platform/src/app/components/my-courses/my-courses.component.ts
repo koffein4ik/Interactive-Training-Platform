@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class MyCoursesComponent implements OnInit {
 
   public courseStatuses: UserCourseStatusModel[];
+  public displayedColumns: string[] = ['courseName', 'courseStatus', 'startButton'];
 
   constructor(private userCourseStatusService: UserCourseStatusService, private router: Router) {
   }
@@ -20,8 +21,8 @@ export class MyCoursesComponent implements OnInit {
       .subscribe((statuses: UserCourseStatusModel[]) => this.courseStatuses = statuses);
   }
 
-  public onStartCourseClick(index: number): void {
-    this.router.navigate(['course-content/' + this.courseStatuses[index].course.id]);
+  public onStartCourseClick(courseId: number): void {
+    this.router.navigate(['course-content/' + courseId]);
   }
 
 }

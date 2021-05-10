@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {AuthenticationService} from "../../services/authentication.service";
 import {LoginDataModel} from "../../models/login-data.model";
-import {HttpErrorResponse} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {throwError} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -14,8 +14,9 @@ import {throwError} from "rxjs";
 export class LoginComponent implements OnInit {
 
   public formGroup: FormGroup;
+  public incorrectCreds: boolean = false;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   public ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -31,11 +32,15 @@ export class LoginComponent implements OnInit {
     }
     this.authenticationService.authorize(loginData)
       .pipe(catchError(error => {
-        console.log(error);
+        this.incorrectCreds = true;
         return throwError(error);
       }))
       .subscribe(token => {
+        this.incorrectCreds = false;
+        this.authenticationService.isUserAuthorized.next(true);
+        alert("You've successfully logged in!");
         localStorage.setItem("token", token.token);
+        this.router.navigate(['/']);
       });
   }
 

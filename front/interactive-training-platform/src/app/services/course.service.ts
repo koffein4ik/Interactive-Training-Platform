@@ -14,7 +14,11 @@ export class CourseService {
   }
 
   public test(): Observable<string> {
-    return this.http.get<string>(this.COURSE_API + "test");
+    const options: Object = {
+      headers: new HttpHeaders(),
+      responseType: 'text'
+    }
+    return this.http.get<string>(this.COURSE_API + "test", options);
   }
 
   public saveCourse(course: CourseModel): Observable<string> {
