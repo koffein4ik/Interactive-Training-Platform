@@ -4,6 +4,7 @@ import com.example.intercactivetraining.model.AuthToken;
 import com.example.intercactivetraining.model.LoginData;
 import com.example.intercactivetraining.security.TokenProvider;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,12 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     private TokenProvider tokenProvider;
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/test")
+    public String test() {
+        return "Success";
+    }
 
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
     public ResponseEntity generateToken(@RequestBody LoginData loginData) {

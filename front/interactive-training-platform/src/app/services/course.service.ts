@@ -13,14 +13,6 @@ export class CourseService {
   constructor(private http: HttpClient) {
   }
 
-  public test(): Observable<string> {
-    const options: Object = {
-      headers: new HttpHeaders(),
-      responseType: 'text'
-    }
-    return this.http.get<string>(this.COURSE_API + "test", options);
-  }
-
   public saveCourse(course: CourseModel): Observable<string> {
     const options: Object = {
       headers: new HttpHeaders(),

@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
         console.log(isAuthorized);
         this.isAuthorized = isAuthorized
       });
-    this.courseService.test()
+    this.authenticationService.test()
       .subscribe(() => {
           this.authenticationService.isUserAuthorized.next(true);
         },

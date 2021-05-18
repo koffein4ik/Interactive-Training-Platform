@@ -12,17 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/course")
 public class CourseController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private CourseService courseService;
-
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/test")
-    public String test() {
-        return "Hello, world " + userService.getUserId();
+    public CourseController(UserService userService, CourseService courseService) {
+        this.userService = userService;
+        this.courseService = courseService;
     }
+
+    private final UserService userService;
+    private final CourseService courseService;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/saveCourse")

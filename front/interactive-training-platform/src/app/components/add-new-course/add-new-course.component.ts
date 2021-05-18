@@ -28,7 +28,7 @@ import {TestTextQuestionModel} from "../../models/test-text-question.model";
 })
 export class AddNewCourseComponent implements OnInit {
 
-  public currentStep: number = 2;
+  public currentStep: number = 1;
   public currentLessonNumber: number = 0;
   public currentTestLessonNumber: number = 0;
   public courseDescriptionFormGroup: FormGroup;
@@ -84,7 +84,6 @@ export class AddNewCourseComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.courseService.test().subscribe((value) => console.log(value));
     this.courseDescriptionFormGroup = new FormGroup({
       courseName: new FormControl(),
       courseShortDescription: new FormControl(),
