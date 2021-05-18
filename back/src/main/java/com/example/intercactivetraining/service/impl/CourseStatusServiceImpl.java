@@ -39,10 +39,10 @@ public class CourseStatusServiceImpl implements CourseStatusService {
     @Override
     public UserCourseStatusEntity applyForCourse(int userId, int courseId) {
         CourseStatusEntity courseStatusEntity = courseStatusRepository.findByStatusName("Applied").orElse(null);
-        UserCourseStatusEntity userCourseStatusEntity = null;
-        CourseEntity courseEntity = null;
+        UserCourseStatusEntity userCourseStatusEntity = new UserCourseStatusEntity();
+        CourseEntity courseEntity = new CourseEntity();
         courseEntity.setId(courseId);
-        UserEntity userEntity = null;
+        UserEntity userEntity = new UserEntity();
         userEntity.setId(userId);
         userCourseStatusEntity.setUser(userEntity);
         userCourseStatusEntity.setStatus(courseStatusEntity);

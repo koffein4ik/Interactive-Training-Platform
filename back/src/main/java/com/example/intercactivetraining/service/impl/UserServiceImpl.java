@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseViewModel saveUser(UserEntity userEntity) {
-        ResponseViewModel responseViewModel = null;
+        ResponseViewModel responseViewModel = new ResponseViewModel();
         if (checkIfUserAlreadyExist(userEntity)) {
             responseViewModel.setErrorOccurred(true);
             responseViewModel.setErrorMessage("User with such login or email already exists");
