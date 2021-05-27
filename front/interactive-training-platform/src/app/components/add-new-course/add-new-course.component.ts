@@ -34,6 +34,7 @@ export class AddNewCourseComponent implements OnInit {
   public courseDescriptionFormGroup: FormGroup;
   public courseImage: File;
   public courseId: number;
+  public allAuthorCourses: CourseModel[] = [];
   private readonly onlyNumbersRegexp: string = '^[0-9]+$';
 
   public textContent: SlideContentModel = {
@@ -72,7 +73,8 @@ export class AddNewCourseComponent implements OnInit {
     fullDescription: "Full descr",
     price: 123,
     imagePath: "abcd",
-    courseContent: [this.courseContent, this.courseContent2]
+    courseContent: [this.courseContent, this.courseContent2],
+    previousCourseId: 0
   }
 
   public courseTest: CourseTestModel;
@@ -88,8 +90,11 @@ export class AddNewCourseComponent implements OnInit {
       courseName: new FormControl(),
       courseShortDescription: new FormControl(),
       courseFullDescription: new FormControl(),
+      previousCourse: new FormControl(),
       coursePrice: new FormControl(null, Validators.pattern(this.onlyNumbersRegexp))
     });
+    this.courseService.getAllCoursesByAuthor()
+      .subscribe((courses: CourseModel[]) => this.allAuthorCourses = courses);
   }
 
   public onClickSaveFirstStep(): void {
@@ -100,7 +105,8 @@ export class AddNewCourseComponent implements OnInit {
       fullDescription: this.courseDescriptionFormGroup.controls["courseFullDescription"].value,
       imagePath: "",
       price: this.courseDescriptionFormGroup.controls["coursePrice"].value,
-      courseContent: []
+      courseContent: [],
+      previousCourseId: this.courseDescriptionFormGroup.controls["previousCourse"].value
     }
     this.fileService.uploadFile(this.courseImage).subscribe((url: string) => this.createdCourse.imagePath = url);
     this.currentStep = 2;

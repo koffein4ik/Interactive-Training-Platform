@@ -30,4 +30,16 @@ export class CourseService {
   public getCourseById(id: number): Observable<CourseModel> {
     return this.http.get<CourseModel>(this.COURSE_API + "getCourseById/" + id);
   }
+
+  public getCourseContentById(id: number): Observable<CourseModel> {
+    return this.http.get<CourseModel>(this.COURSE_API + "getCourseContentById/" + id);
+  }
+
+  public getAllCoursesByAuthor(): Observable<CourseModel[]> {
+    return this.http.get<CourseModel[]>(this.COURSE_API + "getAllCoursesByAuthor");
+  }
+
+  public getNextCourseByCurrentCourseId(id: number): Observable<CourseModel> {
+    return this.http.get<CourseModel>(this.COURSE_API + "getNextCourseByCurrentCourseId/" + id);
+  }
 }

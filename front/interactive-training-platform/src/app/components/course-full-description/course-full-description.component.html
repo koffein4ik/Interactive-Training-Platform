@@ -24,8 +24,12 @@
       </div>
     </div>
 
-    <div class="course-full-description-enroll-button" *ngIf="!userCourseStatus">
+    <div class="course-full-description-enroll-button" *ngIf="!userCourseStatus && isAuthorized">
       <button mat-raised-button color="primary" (click)="onCourseEnrollClick()">Enroll</button>
+    </div>
+
+    <div class="course-full-description-unauthorized" *ngIf="!isAuthorized">
+      You have to log in to apply for this course.
     </div>
 
     <div class="course-full-description-reviews-container">

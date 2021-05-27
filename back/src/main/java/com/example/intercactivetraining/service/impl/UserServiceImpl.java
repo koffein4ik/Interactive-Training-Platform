@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService {
         return responseViewModel;
     }
 
+    @Override
+    public UserEntity findUserById(int userId) {
+        return userRepository.findById(userId).orElse(null);
+    }
+
     private boolean checkIfUserAlreadyExist(UserEntity userEntity) {
         UserEntity user = userRepository.findByLoginOrEmail(userEntity.getLogin(), userEntity.getEmail());
         return user != null;

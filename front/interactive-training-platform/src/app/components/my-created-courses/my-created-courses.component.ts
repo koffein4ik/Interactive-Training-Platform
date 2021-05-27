@@ -3,6 +3,7 @@ import {UserCourseStatusService} from "../../services/user-course-status.service
 import {UserCourseStatusModel} from "../../models/user-course-status.model";
 import {CourseStatusModel} from "../../models/course-status.model";
 import {filter, map} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-my-created-courses',
@@ -13,9 +14,9 @@ export class MyCreatedCoursesComponent implements OnInit {
 
   public userCourseStatuses: UserCourseStatusModel[];
   public courseStatuses: CourseStatusModel[];
-  public displayedColumns: string[] = ['courseName', 'userLogin', 'userFirstName', 'userLastName', 'userEmail', 'currentCourseStatus', 'updatedStatus'];
+  public displayedColumns: string[] = ['courseName', 'userLogin', 'userFirstName', 'userLastName', 'userEmail', 'currentCourseStatus', 'updatedStatus', 'viewCourseStats'];
 
-  constructor(private userCourseStatusService: UserCourseStatusService) {
+  constructor(private userCourseStatusService: UserCourseStatusService, private router: Router) {
   }
 
   public ngOnInit(): void {
@@ -34,6 +35,10 @@ export class MyCreatedCoursesComponent implements OnInit {
     const userCourseStatus = this.userCourseStatuses.find((status: UserCourseStatusModel) => status.id === statusId);
     userCourseStatus.status = this.courseStatuses.find((status: CourseStatusModel) => status.statusName === selectedStatus);
     this.userCourseStatusService.updateUserCourseStatus(userCourseStatus).subscribe();
+  }
+
+  public onViewStatsClick(courseId: number): void {
+    this.router.navigate(['/course-statistics/' + courseId]);
   }
 
 }

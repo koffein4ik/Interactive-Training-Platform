@@ -11,6 +11,18 @@
     <div class="course-page-result-success" *ngIf="testCheckResult === 'Success'">
       Congratulations! You've successfully passed this test!
 
+      <div class="course-page-result-success-next" *ngIf="nextCourse">
+        Now next course is available for you
+        <div class="course-page-result-success-next-link"
+          (click)="onNextCourseClick()">
+          {{nextCourse.name}}
+        </div>
+      </div>
+
+      <div class="course-page-result-success-next" *ngIf="!nextCourse">
+        You've successfully passed full module!
+      </div>
+
       <div class="course-page-result-success-action">
         <button mat-raised-button color="primary" (click)="onOtherCoursesClick()">Check other courses</button>
       </div>
@@ -31,5 +43,9 @@
         <button mat-raised-button color="primary" (click)="onTryAgainClick()">Try again</button>
       </div>
     </div>
+  </div>
+
+  <div class="course-error" *ngIf="isCourseUnavailable">
+    This course is unavailable for you. Please try again later.
   </div>
 </div>

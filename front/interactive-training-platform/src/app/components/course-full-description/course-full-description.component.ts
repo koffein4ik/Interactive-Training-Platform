@@ -7,6 +7,7 @@ import {switchMap, tap} from "rxjs/operators";
 import {UserCourseStatusService} from "../../services/user-course-status.service";
 import {CourseReviewModel} from "../../models/course-review.model";
 import {CourseReviewService} from "../../services/course-review.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-course-full-description',
@@ -19,11 +20,13 @@ export class CourseFullDescriptionComponent implements OnInit {
   public userCourseStatus: UserCourseStatusModel;
   public reviews: CourseReviewModel[];
   public newReviewText: string;
+  public isAuthorized: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private courseService: CourseService,
               private userCourseStatusService: UserCourseStatusService,
-              private reviewService: CourseReviewService) {
+              private reviewService: CourseReviewService,
+              private authenticationService: AuthenticationService) {
   }
 
   public ngOnInit(): void {
@@ -40,6 +43,11 @@ export class CourseFullDescriptionComponent implements OnInit {
           .subscribe((reviews: CourseReviewModel[]) => this.reviews = reviews);
       }
     });
+    this.authenticationService.isUserAuthorized
+      .asObservable()
+      .subscribe((isAuthorized: boolean) => {
+        this.isAuthorized = isAuthorized;
+      });
   }
 
   public onCourseEnrollClick(): void {

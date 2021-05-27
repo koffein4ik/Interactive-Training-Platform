@@ -9,4 +9,5 @@ public interface UserCourseStatusRepository extends PagingAndSortingRepository<U
     Optional<UserCourseStatusEntity> getByCourseIdAndUserId(int courseId, int userId);
     Iterable<UserCourseStatusEntity> getByUserId(int userId);
     Iterable<UserCourseStatusEntity> getByCourse_AuthorId(int authorId);
+    Iterable<UserCourseStatusEntity> getByCourse_Id(int courseId);
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {UserCourseStatusModel} from "../models/user-course-status.model";
 import {Observable} from "rxjs";
@@ -11,7 +11,8 @@ export class UserCourseStatusService {
 
   private readonly USER_COURSE_STATUS_API: string = "http://localhost:8080/api/courseStatus/";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public getUserCourseStatus(courseId: number): Observable<UserCourseStatusModel> {
     return this.http.get<UserCourseStatusModel>(this.USER_COURSE_STATUS_API + "getCourseStatusForUser/" + courseId);
@@ -35,5 +36,9 @@ export class UserCourseStatusService {
 
   public getAllCourseStatuses(): Observable<CourseStatusModel[]> {
     return this.http.get<CourseStatusModel[]>(this.USER_COURSE_STATUS_API + "getAllCourseStatuses");
+  }
+
+  public getCourseStatusesByCourseId(courseId: number) {
+    return this.http.get<UserCourseStatusModel[]>(this.USER_COURSE_STATUS_API + "getCourseStatusesByCourseId/" + courseId);
   }
 }

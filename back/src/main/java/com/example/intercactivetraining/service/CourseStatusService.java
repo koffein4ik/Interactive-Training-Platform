@@ -17,4 +17,8 @@ public interface CourseStatusService {
     UserCourseStatusEntity updateCourseStatus(UserCourseStatusEntity userCourseStatusEntity);
 
     CourseStatusEntity getPassesCourseStatus();
+
+    CourseStatusEntity getAvailableCourseStatus();
+
+    Iterable<UserCourseStatusEntity> getCourseStatusesByCourseId(int courseId);
 }

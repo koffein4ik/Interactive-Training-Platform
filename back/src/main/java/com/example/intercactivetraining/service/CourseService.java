@@ -8,4 +8,10 @@ public interface CourseService {
     Iterable<CourseEntity> getAllCourses();
 
     CourseEntity getCourseById(String id);
+
+    CourseEntity getCourseContentById(int courseId, int userId);
+
+    Iterable<CourseEntity> getAllCoursesByAuthor(int userId);
+
+    CourseEntity getNextCourseByCurrentCourseId(int courseId);
 }

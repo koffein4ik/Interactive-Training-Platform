@@ -8,4 +8,5 @@ export class CourseModel {
   price: number;
   imagePath: string;
   courseContent: LessonModel[];
+  previousCourseId: number;
 }

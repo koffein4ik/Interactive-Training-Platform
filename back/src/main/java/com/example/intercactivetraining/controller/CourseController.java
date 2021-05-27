@@ -33,8 +33,25 @@ public class CourseController {
         return this.courseService.getAllCourses();
     }
 
+    @GetMapping("/getAllCoursesByAuthor")
+    public Iterable<CourseEntity> getAllCoursesByAutor() {
+        int userId = userService.getUserId();
+        return this.courseService.getAllCoursesByAuthor(userId);
+    }
+
     @GetMapping("/getCourseById/{id}")
     public CourseEntity getCourseById(@PathVariable(name = "id") String id) {
         return this.courseService.getCourseById(id);
+    }
+
+    @GetMapping("/getCourseContentById/{id}")
+    public CourseEntity getCourseContentById(@PathVariable(name = "id") String id) {
+        int userId = userService.getUserId();
+        return this.courseService.getCourseContentById(Integer.parseInt(id), userId);
+    }
+
+    @GetMapping("/getNextCourseByCurrentCourseId/{id}")
+    public CourseEntity getNextCourseByCurrentCourseId(@PathVariable(name = "id") String id) {
+        return this.courseService.getNextCourseByCurrentCourseId(Integer.parseInt(id));
     }
 }

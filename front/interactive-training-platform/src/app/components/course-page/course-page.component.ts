@@ -18,6 +18,8 @@ export class CoursePageComponent implements OnInit {
   public courseTest: CourseTestModel;
   public currentStepNumber: number = 1;
   public testCheckResult: string = 'Failed';
+  public isCourseUnavailable;
+  public nextCourse: CourseModel;
 
   constructor(private activatedRoute: ActivatedRoute,
               private courseService: CourseService,
@@ -28,14 +30,17 @@ export class CoursePageComponent implements OnInit {
   public ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
         if (params.id) {
-          this.courseService.getCourseById(params.id)
+          this.courseService.getCourseContentById(params.id)
             .pipe(
               map((course: CourseModel) => {
                 course.courseContent = JSON.parse(<string><unknown>course.courseContent);
                 return course;
               })
             )
-            .subscribe((course: CourseModel) => this.course = course);
+            .subscribe((course: CourseModel) => this.course = course, (error => {
+              alert("This course is unavailable for you");
+              this.isCourseUnavailable = true;
+            }));
           this.testService.getCourseTest(params.id)
             .pipe(
               map((courseTest: CourseTestModel) => {
@@ -44,6 +49,8 @@ export class CoursePageComponent implements OnInit {
               })
             )
             .subscribe((courseTest: CourseTestModel) => this.courseTest = courseTest);
+          this.courseService.getNextCourseByCurrentCourseId(params.id)
+            .subscribe((course: CourseModel) => this.nextCourse = course);
         }
       }
     );
@@ -67,6 +74,10 @@ export class CoursePageComponent implements OnInit {
 
   public onTryAgainClick(): void {
     window.location.reload();
+  }
+
+  public onNextCourseClick():void {
+    window.location.pathname = "/course-content/" + this.nextCourse.id;
   }
 
 }

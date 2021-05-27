@@ -46,6 +46,7 @@ public class CourseStatusServiceImpl implements CourseStatusService {
         userEntity.setId(userId);
         userCourseStatusEntity.setUser(userEntity);
         userCourseStatusEntity.setStatus(courseStatusEntity);
+        userCourseStatusEntity.setCourse(courseEntity);
         return this.userCourseStatusRepository.save(userCourseStatusEntity);
     }
 
@@ -60,7 +61,17 @@ public class CourseStatusServiceImpl implements CourseStatusService {
     }
 
     @Override
+    public CourseStatusEntity getAvailableCourseStatus() {
+        return courseStatusRepository.findByStatusName("Available").orElse(null);
+    }
+
+    @Override
     public UserCourseStatusEntity updateCourseStatus(UserCourseStatusEntity userCourseStatusEntity) {
         return userCourseStatusRepository.save(userCourseStatusEntity);
+    }
+
+    @Override
+    public Iterable<UserCourseStatusEntity> getCourseStatusesByCourseId(int courseId) {
+        return userCourseStatusRepository.getByCourse_Id(courseId);
     }
 }

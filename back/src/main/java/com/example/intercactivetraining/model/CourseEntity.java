@@ -9,6 +9,8 @@ public class CourseEntity {
     private int id;
     private String name;
     private Integer authorId;
+    private Integer previousCourseId;
+    private ModuleEntity module;
     private String shortDescription;
     private String fullDescription;
     private Integer price;
@@ -94,6 +96,26 @@ public class CourseEntity {
 
     public void setCourseContent(String courseContent) {
         this.courseContent = courseContent;
+    }
+
+    @Basic
+    @Column(name = "PreviousCourseId")
+    public Integer getPreviousCourseId() {
+        return previousCourseId;
+    }
+
+    public void setPreviousCourseId(Integer previousCourseId) {
+        this.previousCourseId = previousCourseId;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "ModuleId", referencedColumnName = "id")
+    public ModuleEntity getModule() {
+        return module;
+    }
+
+    public void setModule(ModuleEntity moduleId) {
+        this.module = moduleId;
     }
 
     @Override

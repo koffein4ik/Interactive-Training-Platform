@@ -20,6 +20,17 @@
         <mat-label>Course price</mat-label>
         <input matInput [formControlName]="'coursePrice'" required>
       </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose previousCourse</mat-label>
+        <mat-select #selectedPreviousCourse
+                    [formControlName]="'previousCourse'"
+                    [disabled]="allAuthorCourses?.length === 0">
+          <mat-option *ngFor="let course of allAuthorCourses"
+                      [value]="course.id">{{course.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
 
     <div class="add-new-course-first-step__upload-image">

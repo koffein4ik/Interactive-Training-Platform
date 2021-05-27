@@ -5,5 +5,8 @@ import com.example.intercactivetraining.model.UserEntity;
 
 public interface UserService {
     int getUserId();
+
     ResponseViewModel saveUser(UserEntity userEntity);
+
+    UserEntity findUserById(int userId);
 }

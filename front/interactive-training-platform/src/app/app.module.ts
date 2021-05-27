@@ -45,6 +45,8 @@ import {MyCreatedCoursesComponent} from './components/my-created-courses/my-crea
 import {CourseReviewsComponent} from './components/course-reviews/course-reviews.component';
 import {CoursePageComponent} from './components/course-page/course-page.component';
 import {MatTableModule} from "@angular/material/table";
+import {CourseStatisticsComponent} from './components/coursestatistics/course-statistics.component';
+import { AddModuleComponent } from './components/add-module/add-module.component';
 
 @NgModule({
   declarations: [
@@ -76,26 +78,28 @@ import {MatTableModule} from "@angular/material/table";
     MyCoursesComponent,
     MyCreatedCoursesComponent,
     CourseReviewsComponent,
-    CoursePageComponent
+    CoursePageComponent,
+    CourseStatisticsComponent,
+    AddModuleComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatDatepickerModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatNativeDateModule,
-        MatButtonModule,
-        MatRadioModule,
-        FormsModule,
-        MatIconModule,
-        MatDialogModule,
-        MatSelectModule,
-        HttpClientModule,
-        MatTableModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatRadioModule,
+    FormsModule,
+    MatIconModule,
+    MatDialogModule,
+    MatSelectModule,
+    HttpClientModule,
+    MatTableModule
+  ],
   providers: [APIInterceptor, {
     provide: HTTP_INTERCEPTORS,
     useClass: APIInterceptor,

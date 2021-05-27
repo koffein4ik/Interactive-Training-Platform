@@ -58,4 +58,10 @@ public class CourseStatusController {
     public UserCourseStatusEntity updateCourseStatus(@RequestBody UserCourseStatusEntity userCourseStatusEntity) {
         return courseStatusService.updateCourseStatus(userCourseStatusEntity);
     }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("getCourseStatusesByCourseId/{id}")
+    public Iterable<UserCourseStatusEntity> getCourseStatusesByCourseId(@PathVariable(name = "id") String courseId) {
+        return courseStatusService.getCourseStatusesByCourseId(Integer.parseInt(courseId));
+    }
 }
