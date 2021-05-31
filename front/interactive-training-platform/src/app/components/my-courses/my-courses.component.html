@@ -12,12 +12,12 @@
   <table mat-table [dataSource]="courseStatuses" class="mat-elevation-z8">
 
     <ng-container matColumnDef="courseName">
-      <th mat-header-cell *matHeaderCellDef>Course name</th>
+      <th mat-header-cell *matHeaderCellDef>Module name</th>
       <td mat-cell *matCellDef="let status">{{status.course.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="courseStatus">
-      <th mat-header-cell *matHeaderCellDef>Course status</th>
+      <th mat-header-cell *matHeaderCellDef>Module status</th>
       <td mat-cell *matCellDef="let status">{{status.status.statusName}}</td>
     </ng-container>
 

@@ -2,27 +2,27 @@
   <div class="add-new-course-first-step" *ngIf="currentStep === 1">
     <form [formGroup]="courseDescriptionFormGroup">
       <mat-form-field appearance="legacy">
-        <mat-label>Course name</mat-label>
+        <mat-label>Module name</mat-label>
         <input matInput [formControlName]="'courseName'" required>
       </mat-form-field>
 
       <mat-form-field appearance="legacy">
-        <mat-label>Course Short description</mat-label>
+        <mat-label>Module Short description</mat-label>
         <input matInput [formControlName]="'courseShortDescription'" required>
       </mat-form-field>
 
       <mat-form-field appearance="legacy">
-        <mat-label>Course full description</mat-label>
+        <mat-label>Module full description</mat-label>
         <input matInput [formControlName]="'courseFullDescription'" required>
       </mat-form-field>
 
       <mat-form-field appearance="legacy">
-        <mat-label>Course price</mat-label>
+        <mat-label>Module price</mat-label>
         <input matInput [formControlName]="'coursePrice'" required>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Choose previousCourse</mat-label>
+        <mat-label>Choose previous module</mat-label>
         <mat-select #selectedPreviousCourse
                     [formControlName]="'previousCourse'"
                     [disabled]="allAuthorCourses?.length === 0">
@@ -33,7 +33,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Choose module</mat-label>
+        <mat-label>Choose course</mat-label>
         <mat-select #selectedModule
                     [formControlName]="'module'"
                     [disabled]="allAuthorModules?.length === 0">
@@ -46,7 +46,7 @@
 
     <div class="add-new-course-first-step__upload-image">
       <app-file-upload
-        [title]="'Choose course image'"
+        [title]="'Choose module image'"
         [fileType]="'IMAGE'"
         (onFileChosen)="onCourseImageChosen($event)"></app-file-upload>
     </div>

@@ -3,10 +3,10 @@
    <a routerLink="/">ITP</a>
    <a routerLink="/registration" *ngIf="!isAuthorized">Registration</a>
    <a routerLink="/login" *ngIf="!isAuthorized">Login</a>
-   <a routerLink="/add-new-course" *ngIf="isAuthorized">Create course</a>
+   <a routerLink="/add-new-course" *ngIf="isAuthorized">Create module</a>
    <a routerLink="/my-courses" *ngIf="isAuthorized">My courses</a>
    <a routerLink="/my-created-courses" *ngIf="isAuthorized">My created courses</a>
-   <a routerLink="/add-new-module" *ngIf="isAuthorized">Create module</a>
+   <a routerLink="/add-new-module" *ngIf="isAuthorized">Create course</a>
    <div class="header-logout" *ngIf="isAuthorized" (click)="onLogout()">
      Logout
    </div>
