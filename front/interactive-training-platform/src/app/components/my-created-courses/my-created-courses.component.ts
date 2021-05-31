@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {UserCourseStatusService} from "../../services/user-course-status.service";
 import {UserCourseStatusModel} from "../../models/user-course-status.model";
 import {CourseStatusModel} from "../../models/course-status.model";
-import {filter, map} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,7 +14,7 @@ export class MyCreatedCoursesComponent implements OnInit {
 
   public userCourseStatuses: UserCourseStatusModel[];
   public courseStatuses: CourseStatusModel[];
-  public displayedColumns: string[] = ['courseName', 'userLogin', 'userFirstName', 'userLastName', 'userEmail', 'currentCourseStatus', 'updatedStatus', 'viewCourseStats'];
+  public displayedColumns: string[] = ['courseName', 'userLogin', 'userFirstName', 'userLastName', 'userEmail', 'module', 'currentCourseStatus', 'updatedStatus', 'viewCourseStats'];
 
   constructor(private userCourseStatusService: UserCourseStatusService, private router: Router) {
   }

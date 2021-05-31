@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
+import {CourseService} from "../../services/course.service";
+import {ModuleModel} from "../../models/module.model";
 
 @Component({
   selector: 'app-add-module',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddModuleComponent implements OnInit {
 
-  constructor() { }
+  public formGroup: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private courseService: CourseService) { }
+
+  public ngOnInit(): void {
+    this.formGroup = new FormGroup({
+      name: new FormControl(),
+      description: new FormControl()
+    });
+  }
+
+  public onCreateButtonClick(): void {
+    const moduleModel: ModuleModel = {
+      id: null,
+      authorId: null,
+      name: this.formGroup.controls["name"].value,
+      description: this.formGroup.controls["description"].value
+    }
+    this.courseService.createModule(moduleModel).subscribe(() => alert("Module was created successfully"));
   }
 
 }

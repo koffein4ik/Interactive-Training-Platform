@@ -1,9 +1,9 @@
 package com.example.intercactivetraining.controller;
 
 import com.example.intercactivetraining.model.CourseEntity;
+import com.example.intercactivetraining.model.ModuleEntity;
 import com.example.intercactivetraining.service.CourseService;
 import com.example.intercactivetraining.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,5 +53,18 @@ public class CourseController {
     @GetMapping("/getNextCourseByCurrentCourseId/{id}")
     public CourseEntity getNextCourseByCurrentCourseId(@PathVariable(name = "id") String id) {
         return this.courseService.getNextCourseByCurrentCourseId(Integer.parseInt(id));
+    }
+
+    @PostMapping("/createModule")
+    public void createModule(@RequestBody ModuleEntity moduleEntity) {
+        int userId = userService.getUserId();
+        moduleEntity.setAuthorId(userId);
+        this.courseService.createModule(moduleEntity);
+    }
+
+    @GetMapping("/getAllModulesByAuthor")
+    public Iterable<ModuleEntity> getAllModulesByAuthor() {
+        int userId = userService.getUserId();
+        return this.courseService.getAllModulesByAuthor(userId);
     }
 }

@@ -20,6 +20,7 @@ import {TestService} from "../../services/test.service";
 import {TestQuestionAnswerModel} from "../../models/test-question-answer.model";
 import {RadioButtonQuestionModel} from "../../models/radio-button-question.model";
 import {TestTextQuestionModel} from "../../models/test-text-question.model";
+import {ModuleModel} from "../../models/module.model";
 
 @Component({
   selector: 'app-add-new-course',
@@ -35,6 +36,7 @@ export class AddNewCourseComponent implements OnInit {
   public courseImage: File;
   public courseId: number;
   public allAuthorCourses: CourseModel[] = [];
+  public allAuthorModules: ModuleModel[] = [];
   private readonly onlyNumbersRegexp: string = '^[0-9]+$';
 
   public textContent: SlideContentModel = {
@@ -74,7 +76,8 @@ export class AddNewCourseComponent implements OnInit {
     price: 123,
     imagePath: "abcd",
     courseContent: [this.courseContent, this.courseContent2],
-    previousCourseId: 0
+    previousCourseId: 0,
+    module: null
   }
 
   public courseTest: CourseTestModel;
@@ -91,10 +94,13 @@ export class AddNewCourseComponent implements OnInit {
       courseShortDescription: new FormControl(),
       courseFullDescription: new FormControl(),
       previousCourse: new FormControl(),
+      module: new FormControl(),
       coursePrice: new FormControl(null, Validators.pattern(this.onlyNumbersRegexp))
     });
     this.courseService.getAllCoursesByAuthor()
       .subscribe((courses: CourseModel[]) => this.allAuthorCourses = courses);
+    this.courseService.getAllModulesByAuthor()
+      .subscribe((modules: ModuleModel[]) => this.allAuthorModules = modules);
   }
 
   public onClickSaveFirstStep(): void {
@@ -106,7 +112,13 @@ export class AddNewCourseComponent implements OnInit {
       imagePath: "",
       price: this.courseDescriptionFormGroup.controls["coursePrice"].value,
       courseContent: [],
-      previousCourseId: this.courseDescriptionFormGroup.controls["previousCourse"].value
+      previousCourseId: this.courseDescriptionFormGroup.controls["previousCourse"].value,
+      module: {
+        authorId: null,
+        description: null,
+        name: null,
+        id: this.courseDescriptionFormGroup.controls["module"].value
+      }
     }
     this.fileService.uploadFile(this.courseImage).subscribe((url: string) => this.createdCourse.imagePath = url);
     this.currentStep = 2;

@@ -1,4 +1,5 @@
 import {LessonModel} from "./lesson.model";
+import {ModuleModel} from "./module.model";
 
 export class CourseModel {
   id: number;
@@ -9,4 +10,5 @@ export class CourseModel {
   imagePath: string;
   courseContent: LessonModel[];
   previousCourseId: number;
+  module: ModuleModel;
 }

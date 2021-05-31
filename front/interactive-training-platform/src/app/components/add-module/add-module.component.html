@@ -1,1 +1,21 @@
-<p>add-module works!</p>
+<div class="add-module">
+  <div class="add-module_title">
+    <h1>Create module</h1>
+  </div>
+  <form [formGroup]="formGroup" class="add-module-form">
+    <mat-form-field appearance="legacy">
+      <mat-label>Name</mat-label>
+      <input matInput [formControlName]="'name'" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Description</mat-label>
+      <input matInput [formControlName]="'description'" required>
+    </mat-form-field>
+
+  </form>
+
+  <div class="add-module-submit">
+    <button mat-raised-button color="primary" [disabled]="formGroup.invalid" (click)="onCreateButtonClick()">Create</button>
+  </div>
+</div>

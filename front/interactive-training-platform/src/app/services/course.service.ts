@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CourseModel} from "../models/course.model";
+import {ModuleModel} from "../models/module.model";
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,13 @@ export class CourseService {
 
   public getNextCourseByCurrentCourseId(id: number): Observable<CourseModel> {
     return this.http.get<CourseModel>(this.COURSE_API + "getNextCourseByCurrentCourseId/" + id);
+  }
+
+  public createModule(module: ModuleModel): Observable<void> {
+    return this.http.post<void>(this.COURSE_API + "createModule", module);
+  }
+
+  public getAllModulesByAuthor(): Observable<ModuleModel[]> {
+    return this.http.get<ModuleModel[]>(this.COURSE_API + "getAllModulesByAuthor");
   }
 }

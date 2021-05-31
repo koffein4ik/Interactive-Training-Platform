@@ -20,7 +20,7 @@
       </div>
 
       <div class="course-page-result-success-next" *ngIf="!nextCourse">
-        You've successfully passed full module!
+        You've successfully passed full {{course.module?.name ? course.module.name : ''}} module!
       </div>
 
       <div class="course-page-result-success-action">
